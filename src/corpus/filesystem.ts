@@ -888,7 +888,8 @@ Planinhalt:
   Bemasung aller Raeume, Wandstaerken und Oeffnungen.
   Achsraster: A-F (laengs) x 1-8 (quer), Rasterabstand 5,40 m.
 
-Verweise: Vertrag V-2024-001, Mangel M-003 (Estrichhoehen EG)`,
+Verweise: Vertrag V-2024-001, Mangel M-003 (Estrichhoehen EG)
+Zeichnungsdatei: grundriss_eg_v3.svg`,
 
   '/05_plaene/grundrisse/grundriss_og1_v2.txt': `PLANMETADATEN — GRUNDRISS 1. OBERGESCHOSS
 Plannummer: A-OG1-001-v2
@@ -909,7 +910,8 @@ Planinhalt:
   Raumaufteilung: Wohnen/Essen, Schlafen, Bad, Flur je Einheit.
   Achsraster: A-F x 1-8, identisch zu EG.
 
-Verweise: Vertrag V-2024-004 (Sanitaer Weber), Planlieferliste Anlage 2`,
+Verweise: Vertrag V-2024-004 (Sanitaer Weber), Planlieferliste Anlage 2
+Zeichnungsdatei: grundriss_og1_v2.svg`,
 
   '/05_plaene/grundrisse/grundriss_og2_v2.txt': `PLANMETADATEN — GRUNDRISS 2. OBERGESCHOSS
 Plannummer: A-OG2-001-v2
@@ -949,7 +951,8 @@ Planinhalt:
   - Fundamenttiefe: UK Gruendung -4,50 m, Streifenfundamente
   - Gesamtgebaeudehoehe: 41,30 m (OK Attika)
 
-Verweise: Vertrag V-2024-001, Nachtrag NT-001 (Tiefgarage Abdichtung)`,
+Verweise: Vertrag V-2024-001, Nachtrag NT-001 (Tiefgarage Abdichtung)
+Zeichnungsdatei: laengsschnitt_a_a.svg`,
 
   '/05_plaene/schnitte/querschnitt_b_b.txt': `PLANMETADATEN — QUERSCHNITT B-B
 Plannummer: A-QS-001
