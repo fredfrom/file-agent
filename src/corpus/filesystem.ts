@@ -866,13 +866,156 @@ Thomas Schmidt, Bauleiter
 Hochbau Schmidt GmbH`,
 
   // ── 05 Plaene (Plans / Drawings) ─────────────────────────────────
-  '/05_plaene/grundrisse/grundriss_eg_v3.txt': '',
-  '/05_plaene/grundrisse/grundriss_og1_v2.txt': '',
-  '/05_plaene/grundrisse/grundriss_og2_v2.txt': '',
-  '/05_plaene/schnitte/laengsschnitt_a_a.txt': '',
-  '/05_plaene/schnitte/querschnitt_b_b.txt': '',
-  '/05_plaene/details/detail_fassadenanschluss.txt': '',
-  '/05_plaene/details/detail_tiefgarage_abdichtung.txt': '',
+  '/05_plaene/grundrisse/grundriss_eg_v3.txt': `PLANMETADATEN — GRUNDRISS ERDGESCHOSS
+Plannummer: A-EG-001-v3
+Planbezeichnung: Grundriss Erdgeschoss — Version 3
+Massstab: 1:100
+Datum: 2024-01-28
+Ersteller: Architekturbuero Hoffmann + Partner, M. Hoffmann
+Version: 3.0 (ersetzt v2 vom 2024-01-10)
+Freigabestatus: FREIGEGEBEN (Freigabe Hoffmann 2024-01-29)
+
+Aenderungshistorie:
+  v1 (2023-11-15): Erstentwurf
+  v2 (2024-01-10): Anpassung Treppenhausbreite nach Brandschutzgutachten
+  v3 (2024-01-28): Estrichhoehen-Korrektur nach Mangelmeldung M-003
+
+Planinhalt:
+  Darstellung Erdgeschoss mit Eingangsbereich (Foyer 8,5 x 6,2 m),
+  zentrales Treppenhaus (3-laeulig, Breite 1,30 m nach DIN 18065),
+  Aufzugschacht (1,60 x 2,10 m), 4 Gewerbeeinheiten (GE-01 bis GE-04),
+  Zugang Tiefgarage ueber Rampe Achse A1-A3 (Gefaelle 15%).
+  Bemasung aller Raeume, Wandstaerken und Oeffnungen.
+  Achsraster: A-F (laengs) x 1-8 (quer), Rasterabstand 5,40 m.
+
+Verweise: Vertrag V-2024-001, Mangel M-003 (Estrichhoehen EG)`,
+
+  '/05_plaene/grundrisse/grundriss_og1_v2.txt': `PLANMETADATEN — GRUNDRISS 1. OBERGESCHOSS
+Plannummer: A-OG1-001-v2
+Planbezeichnung: Grundriss 1. Obergeschoss — Version 2
+Massstab: 1:100
+Datum: 2024-01-15
+Ersteller: Architekturbuero Hoffmann + Partner, M. Hoffmann
+Version: 2.0 (ersetzt v1 vom 2023-11-20)
+Freigabestatus: FREIGEGEBEN (Freigabe Hoffmann 2024-01-16)
+
+Aenderungshistorie:
+  v1 (2023-11-20): Erstentwurf
+  v2 (2024-01-15): Installationsschaechte angepasst nach Abstimmung Sanitaer Weber
+
+Planinhalt:
+  6 Wohneinheiten (WE-101 bis WE-106, 45-85 qm), zentrales Treppenhaus,
+  Aufzugschacht, 2 Installationsschaechte (IS-01 Nord, IS-02 Sued).
+  Raumaufteilung: Wohnen/Essen, Schlafen, Bad, Flur je Einheit.
+  Achsraster: A-F x 1-8, identisch zu EG.
+
+Verweise: Vertrag V-2024-004 (Sanitaer Weber), Planlieferliste Anlage 2`,
+
+  '/05_plaene/grundrisse/grundriss_og2_v2.txt': `PLANMETADATEN — GRUNDRISS 2. OBERGESCHOSS
+Plannummer: A-OG2-001-v2
+Planbezeichnung: Grundriss 2. Obergeschoss — Version 2
+Massstab: 1:100
+Datum: 2024-01-15
+Ersteller: Architekturbuero Hoffmann + Partner, M. Hoffmann
+Version: 2.0
+Freigabestatus: FREIGEGEBEN (Freigabe Hoffmann 2024-01-16)
+
+Aenderungshistorie:
+  v1 (2023-11-20): Erstentwurf
+  v2 (2024-01-15): Installationsschaechte angepasst (wie OG1)
+
+Planinhalt:
+  6 Wohneinheiten (WE-201 bis WE-206), Grundrissaufteilung identisch
+  zu 1. OG. Treppenhaus, Aufzug, Installationsschaechte IS-01/IS-02.
+
+Verweise: Vertrag V-2024-001, Grundriss OG1 (A-OG1-001-v2)`,
+
+  '/05_plaene/schnitte/laengsschnitt_a_a.txt': `PLANMETADATEN — LAENGSSCHNITT A-A
+Plannummer: A-LS-001
+Planbezeichnung: Laengsschnitt A-A (Achse 4)
+Massstab: 1:50
+Datum: 2024-01-20
+Ersteller: Architekturbuero Hoffmann + Partner, M. Hoffmann
+Version: 1.0
+Freigabestatus: FREIGEGEBEN (Freigabe Hoffmann 2024-01-22)
+
+Planinhalt:
+  Schnittdarstellung durch Gebaeudelaengsachse (Achse 4):
+  - Tiefgarage: UK Bodenplatte -3,60 m, OK Decke -0,30 m
+  - Erdgeschoss: OK FFB +/-0,00 m, Geschosshoehe 3,50 m (lichte Hoehe 3,00 m)
+  - OG 1-12: Geschosshoehe je 2,90 m (lichte Hoehe 2,55 m)
+  - Dachaufbau: Flachdach mit 2% Gefaelle, Attika +38,10 m
+  - Deckenstaerken: 25 cm Stahlbeton (EG-OG12), 30 cm (TG-Decke)
+  - Fundamenttiefe: UK Gruendung -4,50 m, Streifenfundamente
+  - Gesamtgebaeudehoehe: 41,30 m (OK Attika)
+
+Verweise: Vertrag V-2024-001, Nachtrag NT-001 (Tiefgarage Abdichtung)`,
+
+  '/05_plaene/schnitte/querschnitt_b_b.txt': `PLANMETADATEN — QUERSCHNITT B-B
+Plannummer: A-QS-001
+Planbezeichnung: Querschnitt B-B (Achse C)
+Massstab: 1:50
+Datum: 2024-01-20
+Ersteller: Architekturbuero Hoffmann + Partner, M. Hoffmann
+Version: 1.0
+Freigabestatus: FREIGEGEBEN (Freigabe Hoffmann 2024-01-22)
+
+Planinhalt:
+  Schnittdarstellung durch Gebaeudequerachse (Achse C):
+  - Fassadenaufbau Ost: WDVS 160 mm (nach Nachtrag NT-002: Upgrade auf 200 mm)
+  - Fassadenaufbau West: WDVS 160 mm (geplant, Ausfuehrung durch Fassaden Kern)
+  - Treppenhausposition: zentral, Breite 6,20 m
+  - Installationsschaechte IS-01 (Nord) und IS-02 (Sued), je 0,80 x 0,60 m
+
+Verweise: Vertrag V-2024-005 (Fassaden Kern), Nachtrag NT-002 (Daemmung)`,
+
+  '/05_plaene/details/detail_fassadenanschluss.txt': `PLANMETADATEN — DETAILZEICHNUNG FASSADENANSCHLUSS
+Plannummer: A-DET-F01
+Planbezeichnung: Detail Fassadenanschluss Fenster — Regelgeschoss
+Massstab: 1:5
+Datum: 2024-02-10
+Ersteller: Architekturbuero Hoffmann + Partner, M. Hoffmann
+Version: 1.0
+Freigabestatus: IN PRUEFUNG (Pruefung durch Fassaden Kern ausstehend)
+
+Planinhalt:
+  Detaildarstellung Fensteranschluss im Regelgeschoss (Sturzbereich):
+  - Bestandswand: Stahlbeton 25 cm
+  - WDVS-Aufbau: Klebemoertel 5 mm, Daemmplatte EPS 200 mm (gemaess NT-002),
+    Armierungsschicht 5 mm, Schlussbeschichtung Silikonharzputz 3 mm
+  - Fensterrahmen: Kunststoff, 3-fach Verglasung, Uw 0,95 W/(m2K)
+  - Abdichtungsebene: Kompriband aussen, Folienbahn innen
+  - Dampfbremse: sd-Wert >= 2 m, Anschluss an Fensterrahmen mit Klebeband
+  - Fensterbank: Aluminium, 3% Gefaelle nach aussen
+
+Hinweis: Daemmstaerke 200 mm gemaess Nachtrag NT-002 (Upgrade von 160 mm
+auf 200 mm nach EnEV-Neuberechnung). Ausfuehrung durch Fassaden Kern (V-2024-005).
+
+Verweise: Nachtrag NT-002, Vertrag V-2024-005`,
+
+  '/05_plaene/details/detail_tiefgarage_abdichtung.txt': `PLANMETADATEN — DETAILZEICHNUNG ABDICHTUNG TIEFGARAGE
+Plannummer: A-DET-TG01
+Planbezeichnung: Detail Abdichtung Bodenplatte Tiefgarage
+Massstab: 1:10
+Datum: 2024-02-05
+Ersteller: Architekturbuero Hoffmann + Partner, M. Hoffmann
+Version: 1.0
+Freigabestatus: FREIGEGEBEN (Freigabe Hoffmann 2024-02-06)
+
+Planinhalt:
+  Detaildarstellung Abdichtung Bodenplatte Tiefgarage (Bereich Achse B2-D6):
+  - Erdreich / Sauberkeitsschicht: Magerbeton 5 cm
+  - Abdichtungsbahn: 2-lagige Bitumenschweissbahn (DIN 18533, Klasse W2.1-E)
+  - Schutzschicht: PE-Noppenfolie 10 mm
+  - Drainageschicht: Filtervlies + Kiespackung 15 cm, DN 100 Drainrohr
+  - Bodenplatte: Stahlbeton C30/37, d=30 cm, Bewehrung oben und unten
+  - Beschichtung: Epoxidharz-Bodenbeschichtung (Tiefgarage)
+
+Hinweis: Abdichtung wurde im Nachtrag NT-001 zusaetzlich beauftragt
+(Wassereintritt Achse B3, Mangel M-001). Ausfuehrung Mueller Bau (V-2024-002).
+Maengelbeseitigung M-001 in Arbeit, Frist bis 2024-02-28.
+
+Verweise: Nachtrag NT-001, Mangel M-001, Vertrag V-2024-002`,
 
   // ── 06 Schriftverkehr (Correspondence) ───────────────────────────
   '/06_schriftverkehr/eingehend/2024-01-20_stadtpark_ag_freigabe_rohbau.txt': `Stadtpark Immobilien AG
@@ -1234,11 +1377,176 @@ _________________________
 Thomas Schmidt, Bauleiter`,
 
   // ── 08 Rechnungen (Invoices) ─────────────────────────────────────
-  '/08_rechnungen/geprueft/re_mueller_bau_abschlag_01.txt': '',
-  '/08_rechnungen/geprueft/re_elektro_berger_abschlag_01.txt': '',
-  '/08_rechnungen/geprueft/re_sanitaer_weber_abschlag_01.txt': '',
-  '/08_rechnungen/offen/re_fassaden_kern_abschlag_01.txt': '',
-  '/08_rechnungen/offen/re_mueller_bau_abschlag_02.txt': '',
+  '/08_rechnungen/geprueft/re_mueller_bau_abschlag_01.txt': `ABSCHLAGSRECHNUNG
+Rechnungsnummer: RE-2024-001
+Rechnungsdatum: 2024-02-01
+Leistungszeitraum: 01.01.2024 — 31.01.2024
+
+Auftragnehmer:
+  Mueller Bau GmbH & Co. KG
+  Hans Mueller, Geschaeftsfuehrer
+  Industriestrasse 8, 12345 Berlin
+
+Auftraggeber:
+  Hochbau Schmidt GmbH
+  Thomas Schmidt, Geschaeftsfuehrer
+  Berliner Strasse 17, 10715 Berlin
+
+Vertragsnummer: V-2024-002 (Rohbauarbeiten)
+1. Abschlagsrechnung (30% der Gesamtauftragssumme 890.000,00 EUR)
+
+Leistungsbeschreibung:
+  LV-Pos. 01.01-01.05: Abbrucharbeiten Bestand (abgeschlossen)
+  LV-Pos. 02.01-02.08: Betonarbeiten Tiefgarage (Bodenplatte, Waende)
+  LV-Pos. 02.09-02.12: Bewehrungsarbeiten Tiefgarage
+
+Nettobetrag:                267.000,00 EUR
+MwSt. 19%:                   50.730,00 EUR
+Bruttobetrag:               317.730,00 EUR
+
+Zahlungsziel: 14 Tage nach Rechnungseingang (bis 2024-02-15)
+Bankverbindung: Mueller Bau, IBAN DE89 3704 0044 0123 4567 89
+
+Pruefvermerk: Sachlich und rechnerisch geprueft, Schmidt, 2024-02-05
+Status: GEPRUEFT UND FREIGEGEBEN`,
+
+  '/08_rechnungen/geprueft/re_elektro_berger_abschlag_01.txt': `ABSCHLAGSRECHNUNG
+Rechnungsnummer: RE-2024-002
+Rechnungsdatum: 2024-02-03
+Leistungszeitraum: 15.01.2024 — 31.01.2024
+
+Auftragnehmer:
+  Elektro Berger GmbH
+  Frank Berger, Geschaeftsfuehrer
+  Voltastrasse 12, 10587 Berlin
+
+Auftraggeber:
+  Hochbau Schmidt GmbH
+  Thomas Schmidt, Geschaeftsfuehrer
+  Berliner Strasse 17, 10715 Berlin
+
+Vertragsnummer: V-2024-003 (Elektroinstallation)
+1. Abschlagsrechnung (20% der Gesamtauftragssumme 420.000,00 EUR)
+
+Leistungsbeschreibung:
+  LV-Pos. 01.01-01.03: Bestandsaufnahme Elektroinstallation
+  LV-Pos. 01.04-01.06: Demontage Altinstallation (Geschosse 1-4)
+  LV-Pos. 02.01: Vorbereitung Kabeltrassen UG
+
+Nettobetrag:                 84.000,00 EUR
+MwSt. 19%:                   15.960,00 EUR
+Bruttobetrag:                99.960,00 EUR
+
+Zahlungsziel: 14 Tage nach Rechnungseingang (bis 2024-02-17)
+Bankverbindung: Elektro Berger, IBAN DE45 1001 0010 0987 6543 21
+
+Pruefvermerk: Sachlich und rechnerisch geprueft, Schmidt, 2024-02-08
+Status: GEPRUEFT UND FREIGEGEBEN`,
+
+  '/08_rechnungen/geprueft/re_sanitaer_weber_abschlag_01.txt': `ABSCHLAGSRECHNUNG
+Rechnungsnummer: RE-2024-003
+Rechnungsdatum: 2024-02-10
+Leistungszeitraum: 22.01.2024 — 07.02.2024
+
+Auftragnehmer:
+  Sanitaer Weber GmbH
+  Peter Weber, Geschaeftsfuehrer
+  Wasserweg 5, 10553 Berlin
+
+Auftraggeber:
+  Hochbau Schmidt GmbH
+  Thomas Schmidt, Geschaeftsfuehrer
+  Berliner Strasse 17, 10715 Berlin
+
+Vertragsnummer: V-2024-004 (Sanitaerinstallation)
+1. Abschlagsrechnung (15% der Gesamtauftragssumme 380.000,00 EUR)
+
+Leistungsbeschreibung:
+  LV-Pos. 01.01-01.04: Demontage Altinstallation Sanitaer (UG + EG)
+  LV-Pos. 02.01-02.03: Rohrinstallation UG (Grundleitungen, Fallrohre)
+  LV-Pos. 02.04: Druckpruefung Leitungsnetz UG
+
+Hinweis: Reparatur Rohrbruch (Mangel M-005) ist NICHT in diesem
+Abschlag enthalten. M-005 faellt unter Gewaehrleistung gemaess
+ss 13 Abs. 5 Nr. 1 VOB/B (Mangel innerhalb Gewaehrleistungsfrist).
+
+Nettobetrag:                 57.000,00 EUR
+MwSt. 19%:                   10.830,00 EUR
+Bruttobetrag:                67.830,00 EUR
+
+Zahlungsziel: 14 Tage nach Rechnungseingang (bis 2024-02-24)
+Bankverbindung: Sanitaer Weber, IBAN DE12 2004 0000 0234 5678 90
+
+Pruefvermerk: Sachlich und rechnerisch geprueft, Schmidt, 2024-02-14
+Status: GEPRUEFT UND FREIGEGEBEN`,
+
+  '/08_rechnungen/offen/re_fassaden_kern_abschlag_01.txt': `ABSCHLAGSRECHNUNG
+Rechnungsnummer: RE-2024-004
+Rechnungsdatum: 2024-02-15
+Leistungszeitraum: 01.02.2024 — 14.02.2024
+
+Auftragnehmer:
+  Fassaden Kern GmbH
+  Michael Kern, Geschaeftsfuehrer
+  Fassadenweg 22, 10961 Berlin
+
+Auftraggeber:
+  Hochbau Schmidt GmbH
+  Thomas Schmidt, Geschaeftsfuehrer
+  Berliner Strasse 17, 10715 Berlin
+
+Vertragsnummer: V-2024-005 (Fassadenarbeiten)
+1. Abschlagsrechnung (10% der Gesamtauftragssumme 520.000,00 EUR)
+
+Leistungsbeschreibung:
+  LV-Pos. 01.01-01.02: Geruest Teilaufbau (Suedseite, Geschosse 1-6)
+  LV-Pos. 01.03: Fassadenbestandsaufnahme und Schadenskartierung
+  LV-Pos. 01.04: Probeflaeche WDVS (2 x 3 m, Achse D4)
+
+Nettobetrag:                 52.000,00 EUR
+MwSt. 19%:                    9.880,00 EUR
+Bruttobetrag:                61.880,00 EUR
+
+Zahlungsziel: 14 Tage nach Rechnungseingang (bis 2024-03-01)
+Bankverbindung: Fassaden Kern, IBAN DE78 3005 0110 0012 3456 78
+
+Status: OFFEN — Eingang 2024-02-18, noch nicht geprueft`,
+
+  '/08_rechnungen/offen/re_mueller_bau_abschlag_02.txt': `ABSCHLAGSRECHNUNG
+Rechnungsnummer: RE-2024-005
+Rechnungsdatum: 2024-03-01
+Leistungszeitraum: 01.02.2024 — 28.02.2024
+
+Auftragnehmer:
+  Mueller Bau GmbH & Co. KG
+  Hans Mueller, Geschaeftsfuehrer
+  Industriestrasse 8, 12345 Berlin
+
+Auftraggeber:
+  Hochbau Schmidt GmbH
+  Thomas Schmidt, Geschaeftsfuehrer
+  Berliner Strasse 17, 10715 Berlin
+
+Vertragsnummer: V-2024-002 (Rohbauarbeiten)
+2. Abschlagsrechnung (25% der Gesamtauftragssumme 890.000,00 EUR)
+
+Leistungsbeschreibung:
+  LV-Pos. 03.01-03.06: Betonarbeiten OG1-OG3 (Decken, Stuetzen, Unterzuege)
+  LV-Pos. 04.01-04.04: Mauerwerk OG1-OG3 (Innenwandkonstruktion)
+  LV-Pos. 03.07: Treppenhaus Ortbeton Geschosse 1-3
+
+Nettobetrag:                222.500,00 EUR
+MwSt. 19%:                   42.275,00 EUR
+Bruttobetrag:               264.775,00 EUR
+
+Zahlungsziel: 14 Tage nach Rechnungseingang (bis 2024-03-15)
+Bankverbindung: Mueller Bau, IBAN DE89 3704 0044 0123 4567 89
+
+Status: OFFEN — Pruefung zurueckgestellt
+Begruendung: Offene Maengel M-001 (Wassereintritt Tiefgarage) und
+M-003 (Estrichhoehen EG) muessen vor Freigabe beseitigt werden.
+Pruefung wird nach Maengelbeseitigung fortgesetzt.
+Vgl. Baustellenprotokoll vom 2024-02-15 und Maengelberichte.`,
 
   // ── 09 Genehmigungen (Permits / Approvals) ──────────────────────
   '/09_genehmigungen/baugenehmigung_2023-06-01.txt': `BAUGENEHMIGUNG
