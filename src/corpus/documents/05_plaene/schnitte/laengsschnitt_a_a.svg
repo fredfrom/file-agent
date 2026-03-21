@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 841 594" width="841" height="594">
+  <!-- Background -->
+  <rect width="841" height="594" fill="#f5f5f5" stroke="#333" stroke-width="2"/>
+
+  <!-- Title bar -->
+  <text x="420" y="35" text-anchor="middle" font-size="16" font-family="Helvetica" font-weight="bold">
+    LAENGSSCHNITT A-A - Plan-Nr. A-LS-001
+  </text>
+  <text x="420" y="55" text-anchor="middle" font-size="11" font-family="Helvetica" fill="#666">
+    Massstab 1:50 | Architekturbuero Hoffmann + Partner | Achse 4
+  </text>
+
+  <!-- Ground line -->
+  <line x1="100" y1="380" x2="700" y2="380" stroke="#333" stroke-width="2"/>
+  <text x="720" y="384" font-size="9" font-family="Helvetica">+/- 0,00 m</text>
+
+  <!-- Tiefgarage -->
+  <rect x="100" y="380" width="600" height="60" fill="#e0e0e0" stroke="#333" stroke-width="1.5"/>
+  <text x="400" y="415" text-anchor="middle" font-size="10" font-family="Helvetica">Tiefgarage (UK -3,60 m / OK -0,30 m)</text>
+
+  <!-- EG -->
+  <rect x="100" y="320" width="600" height="60" fill="#e8f4e8" stroke="#333" stroke-width="1"/>
+  <text x="400" y="355" text-anchor="middle" font-size="10" font-family="Helvetica">EG (lH 3,00 m)</text>
+
+  <!-- OG 1-4 -->
+  <rect x="100" y="200" width="600" height="120" fill="#fff" stroke="#333" stroke-width="1"/>
+  <text x="400" y="265" text-anchor="middle" font-size="10" font-family="Helvetica">OG 1-4 (je 2,90 m GH, lH 2,55 m)</text>
+  <line x1="100" y1="230" x2="700" y2="230" stroke="#ccc" stroke-width="0.5" stroke-dasharray="4,4"/>
+  <line x1="100" y1="260" x2="700" y2="260" stroke="#ccc" stroke-width="0.5" stroke-dasharray="4,4"/>
+  <line x1="100" y1="290" x2="700" y2="290" stroke="#ccc" stroke-width="0.5" stroke-dasharray="4,4"/>
+
+  <!-- OG 5-12 -->
+  <rect x="100" y="90" width="600" height="110" fill="#f5f5f5" stroke="#333" stroke-width="1"/>
+  <text x="400" y="150" text-anchor="middle" font-size="10" font-family="Helvetica">OG 5-12 (je 2,90 m GH)</text>
+
+  <!-- Dach -->
+  <line x1="90" y1="85" x2="710" y2="85" stroke="#333" stroke-width="2"/>
+  <text x="720" y="89" font-size="8" font-family="Helvetica">+38,10 m (OK Attika)</text>
+  <text x="400" y="80" text-anchor="middle" font-size="8" font-family="Helvetica" fill="#666">Flachdach 2% Gefaelle</text>
+
+  <!-- Fundament -->
+  <rect x="120" y="440" width="80" height="30" fill="#bbb" stroke="#333" stroke-width="1"/>
+  <rect x="350" y="440" width="80" height="30" fill="#bbb" stroke="#333" stroke-width="1"/>
+  <rect x="580" y="440" width="80" height="30" fill="#bbb" stroke="#333" stroke-width="1"/>
+  <text x="400" y="490" text-anchor="middle" font-size="8" font-family="Helvetica" fill="#666">Streifenfundamente, UK -4,50 m</text>
+
+  <!-- Dimension lines -->
+  <text x="730" y="155" font-size="8" font-family="Helvetica" fill="#999">Gesamthoehe:</text>
+  <text x="730" y="167" font-size="8" font-family="Helvetica" fill="#999">41,30 m</text>
+
+  <!-- Deckenstaerken -->
+  <text x="60" y="325" font-size="7" font-family="Helvetica" fill="#999">25 cm</text>
+  <text x="60" y="385" font-size="7" font-family="Helvetica" fill="#999">30 cm</text>
+
+  <!-- Title block -->
+  <rect x="541" y="510" width="280" height="70" fill="white" stroke="#333" stroke-width="1.5"/>
+  <line x1="541" y1="528" x2="821" y2="528" stroke="#333" stroke-width="0.5"/>
+  <text x="551" y="524" font-size="9" font-family="Helvetica" font-weight="bold">Projekt: Sanierung Hochhaus am Stadtpark</text>
+  <text x="551" y="542" font-size="9" font-family="Helvetica">Plan: Laengsschnitt A-A | Plan-Nr: A-LS-001</text>
+  <text x="551" y="556" font-size="9" font-family="Helvetica">Massstab: 1:50 | Datum: 2024-01-20 | V1</text>
+  <text x="551" y="570" font-size="9" font-family="Helvetica">Ersteller: Hoffmann + Partner</text>
+</svg>

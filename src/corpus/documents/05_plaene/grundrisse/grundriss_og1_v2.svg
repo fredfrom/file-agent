@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 841 594" width="841" height="594">
+  <!-- Background -->
+  <rect width="841" height="594" fill="#f5f5f5" stroke="#333" stroke-width="2"/>
+
+  <!-- Title bar -->
+  <text x="420" y="35" text-anchor="middle" font-size="16" font-family="Helvetica" font-weight="bold">
+    GRUNDRISS 1. OG - Plan-Nr. A-OG1-001-v2
+  </text>
+  <text x="420" y="55" text-anchor="middle" font-size="11" font-family="Helvetica" fill="#666">
+    Massstab 1:100 | Architekturbuero Hoffmann + Partner
+  </text>
+
+  <!-- Treppenhaus -->
+  <rect x="370" y="80" width="60" height="100" fill="#fff3e0" stroke="#333" stroke-width="1.5"/>
+  <text x="400" y="130" text-anchor="middle" font-size="8" font-family="Helvetica">Treppenhaus</text>
+
+  <!-- Aufzug -->
+  <rect x="430" y="80" width="40" height="50" fill="#e3f2fd" stroke="#333" stroke-width="1.5"/>
+  <text x="450" y="108" text-anchor="middle" font-size="7" font-family="Helvetica">Aufzug</text>
+
+  <!-- WE-101 -->
+  <rect x="60" y="200" width="120" height="100" fill="#fff" stroke="#333" stroke-width="1"/>
+  <text x="120" y="250" text-anchor="middle" font-size="10" font-family="Helvetica">WE-101</text>
+  <text x="120" y="265" text-anchor="middle" font-size="8" font-family="Helvetica" fill="#666">85 qm</text>
+
+  <!-- WE-102 -->
+  <rect x="190" y="200" width="120" height="100" fill="#fff" stroke="#333" stroke-width="1"/>
+  <text x="250" y="250" text-anchor="middle" font-size="10" font-family="Helvetica">WE-102</text>
+  <text x="250" y="265" text-anchor="middle" font-size="8" font-family="Helvetica" fill="#666">65 qm</text>
+
+  <!-- WE-103 -->
+  <rect x="320" y="200" width="120" height="100" fill="#fff" stroke="#333" stroke-width="1"/>
+  <text x="380" y="250" text-anchor="middle" font-size="10" font-family="Helvetica">WE-103</text>
+  <text x="380" y="265" text-anchor="middle" font-size="8" font-family="Helvetica" fill="#666">55 qm</text>
+
+  <!-- WE-104 -->
+  <rect x="60" y="320" width="120" height="100" fill="#fff" stroke="#333" stroke-width="1"/>
+  <text x="120" y="370" text-anchor="middle" font-size="10" font-family="Helvetica">WE-104</text>
+  <text x="120" y="385" text-anchor="middle" font-size="8" font-family="Helvetica" fill="#666">45 qm</text>
+
+  <!-- WE-105 -->
+  <rect x="190" y="320" width="120" height="100" fill="#fff" stroke="#333" stroke-width="1"/>
+  <text x="250" y="370" text-anchor="middle" font-size="10" font-family="Helvetica">WE-105</text>
+  <text x="250" y="385" text-anchor="middle" font-size="8" font-family="Helvetica" fill="#666">55 qm</text>
+
+  <!-- WE-106 -->
+  <rect x="320" y="320" width="120" height="100" fill="#fff" stroke="#333" stroke-width="1"/>
+  <text x="380" y="370" text-anchor="middle" font-size="10" font-family="Helvetica">WE-106</text>
+  <text x="380" y="385" text-anchor="middle" font-size="8" font-family="Helvetica" fill="#666">75 qm</text>
+
+  <!-- Axis labels -->
+  <text x="60" y="460" font-size="9" font-family="Helvetica" fill="#999">Achsraster: A-F x 1-8, identisch zu EG</text>
+
+  <!-- Title block -->
+  <rect x="541" y="470" width="280" height="100" fill="white" stroke="#333" stroke-width="1.5"/>
+  <line x1="541" y1="490" x2="821" y2="490" stroke="#333" stroke-width="0.5"/>
+  <text x="551" y="485" font-size="9" font-family="Helvetica" font-weight="bold">Projekt: Sanierung Hochhaus am Stadtpark</text>
+  <text x="551" y="505" font-size="9" font-family="Helvetica">Plan: Grundriss 1. Obergeschoss</text>
+  <text x="551" y="520" font-size="9" font-family="Helvetica">Plan-Nr: A-OG1-001-v2</text>
+  <text x="551" y="535" font-size="9" font-family="Helvetica">Massstab: 1:100 | Format: A1</text>
+  <text x="551" y="550" font-size="9" font-family="Helvetica">Datum: 2024-01-15 | Version: 2</text>
+  <text x="551" y="565" font-size="9" font-family="Helvetica">Ersteller: Hoffmann + Partner</text>
+</svg>
