@@ -481,18 +481,389 @@ Peter Weber, Meister
 Sanitaer Weber GmbH`,
 
   // ── 03 Protokolle (Meeting Minutes) ──────────────────────────────
-  '/03_protokolle/baustellenbesprechung/2024-01-15_baubesprechung_nr001.txt': '',
-  '/03_protokolle/baustellenbesprechung/2024-01-29_baubesprechung_nr002.txt': '',
-  '/03_protokolle/baustellenbesprechung/2024-02-12_baubesprechung_nr003.txt': '',
-  '/03_protokolle/planungsbesprechung/2024-01-10_planungsbesprechung_nr001.txt': '',
-  '/03_protokolle/planungsbesprechung/2024-02-07_planungsbesprechung_nr002.txt': '',
+  '/03_protokolle/baustellenbesprechung/2024-01-15_baubesprechung_nr001.txt': `PROTOKOLL BAUBESPRECHUNG NR. 001
+Projekt: Sanierung Hochhaus am Stadtpark
+Datum: 15.01.2024, 10:00 Uhr
+Ort: Baucontainer Stadtpark, Stadtparkstrasse 15, Berlin-Charlottenburg
+
+Teilnehmer:
+- Thomas Schmidt (Hochbau Schmidt GmbH, Bauleitung)
+- Hans Mueller (Mueller Bau GmbH & Co. KG, Rohbau)
+- Frank Berger (Elektro Berger OHG, Elektro)
+- Peter Weber (Sanitaer Weber GmbH, Sanitaer/Heizung)
+- Maria Hoffmann (Architekturbuero Hoffmann + Partner, Objektueberwachung)
+
+TOP 1: Baustelleneinrichtung
+Die Baustelleneinrichtung ist abgeschlossen. Container, Bauzaun und
+Zufahrt sind eingerichtet. Stromanschluss 63A liegt vor.
+Verantwortlich: Schmidt. Status: erledigt.
+
+TOP 2: Zeitplan und Vertragslage
+Der Bauzeitenplan gemaess Hauptvertrag V-2024-001 wird bestaetigt.
+Baubeginn erfolgt planmaessig am 02.01.2024 mit Abbrucharbeiten durch
+Mueller Bau (Vertrag V-2024-002). Alle Nachunternehmervertraege sind
+unterzeichnet (V-2024-002 bis V-2024-005).
+
+TOP 3: Sicherheitsunterweisung
+Bauleiter Schmidt fuehrt Sicherheitsunterweisung durch. Alle Gewerke
+bestaetigen Kenntnisnahme SiGe-Plan. Erste-Hilfe-Kasten im Container.
+
+TOP 4: Verschiedenes
+Frau Hoffmann weist auf Ergebnisse der Bestandsaufnahme hin. Einzelne
+Bauteile zeigen staerkere Schaeden als erwartet. Detaillierte Pruefung
+laeuft (siehe Planungsbesprechung vom 10.01.2024).
+
+Naechster Termin: 29.01.2024, 10:00 Uhr
+
+Protokollant: Thomas Schmidt, Bauleiter
+Verteiler: alle Teilnehmer, Dr. Richter (Stadtpark Immobilien AG)`,
+  '/03_protokolle/baustellenbesprechung/2024-01-29_baubesprechung_nr002.txt': `PROTOKOLL BAUBESPRECHUNG NR. 002
+Projekt: Sanierung Hochhaus am Stadtpark
+Datum: 29.01.2024, 10:00 Uhr
+Ort: Baucontainer Stadtpark, Stadtparkstrasse 15, Berlin-Charlottenburg
+
+Teilnehmer:
+- Thomas Schmidt (Hochbau Schmidt GmbH, Bauleitung)
+- Hans Mueller (Mueller Bau GmbH & Co. KG, Rohbau)
+- Frank Berger (Elektro Berger OHG, Elektro)
+- Peter Weber (Sanitaer Weber GmbH, Sanitaer/Heizung)
+- Maria Hoffmann (Architekturbuero Hoffmann + Partner, Objektueberwachung)
+
+TOP 1: Baustands-Bericht Rohbau
+Mueller Bau liegt ca. 5 Werktage hinter dem Terminplan zurueck.
+Herr Mueller begruendet den Rueckstand mit schlechter Witterung
+(Dauerregen KW 3, Temperaturen unter 0°C KW 4). Betonarbeiten in
+der Tiefgarage mussten zeitweise eingestellt werden.
+Bauleiter Schmidt mahnt zur Aufholung und verweist auf die
+Vertragsstrafenregelung gemaess V-2024-001 ss 5.
+
+TOP 2: Mangel M-001 — Riss in Tiefgaragendecke
+Am 28.01.2024 wurde ein ca. 2 m langer Riss in der Tiefgaragendecke
+im Bereich Achse B3-C3 festgestellt. Der Riss ist augenscheinlich
+nicht nur oberflaechlich. Frau Hoffmann ordnet eine gutachterliche
+Untersuchung an. Mueller Bau wird als verantwortliches Gewerk
+benannt. Maengelruege wird vorbereitet.
+
+TOP 3: Nachtrag NT-001 angekuendigt
+Aufgrund der bei den Abbrucharbeiten festgestellten Durchfeuchtungen
+der Bodenplatte (Tiefgarage) sind zusaetzliche Abdichtungsarbeiten
+erforderlich. Mueller Bau kuendigt ein Nachtragsangebot an.
+Rechtsgrundlage: ss 2 Abs. 5 VOB/B.
+
+TOP 4: Stand Elektro- und Sanitaerarbeiten
+Elektro Berger: Bestandsaufnahme laeuft planmaessig. Erste
+Schlitzarbeiten ab KW 6. Mangel M-004 (Sicherungskasten UG falsch
+verdrahtet) wird bis 25.01.2024 behoben — Nachtrag: ist bereits behoben.
+Sanitaer Weber: Demontage Altleitungen im UG begonnen.
+
+TOP 5: Verschiedenes
+Frau Hoffmann erinnert an ausstehende Planlieferung Fassadendetail.
+Liefertermin ist ueberfaellig.
+
+Naechster Termin: 12.02.2024, 10:00 Uhr
+
+Protokollant: Thomas Schmidt, Bauleiter
+Verteiler: alle Teilnehmer, Dr. Richter (Stadtpark Immobilien AG)`,
+  '/03_protokolle/baustellenbesprechung/2024-02-12_baubesprechung_nr003.txt': `PROTOKOLL BAUBESPRECHUNG NR. 003
+Projekt: Sanierung Hochhaus am Stadtpark
+Datum: 12.02.2024, 10:00 Uhr
+Ort: Baucontainer Stadtpark, Stadtparkstrasse 15, Berlin-Charlottenburg
+
+Teilnehmer:
+- Thomas Schmidt (Hochbau Schmidt GmbH, Bauleitung)
+- Hans Mueller (Mueller Bau GmbH & Co. KG, Rohbau)
+- Frank Berger (Elektro Berger OHG, Elektro)
+- Peter Weber (Sanitaer Weber GmbH, Sanitaer/Heizung)
+- Michael Kern (Fassaden Kern AG, Fassade)
+- Maria Hoffmann (Architekturbuero Hoffmann + Partner, Objektueberwachung)
+
+TOP 1: Behinderungsanzeige Mueller Bau
+Herr Mueller hat am 15.02.2024 eine formale Behinderungsanzeige
+gemaess ss 6 Abs. 1 VOB/B angekuendigt (liegt zum Zeitpunkt der
+Besprechung noch nicht schriftlich vor). Begruendung: verspaetete
+Planlieferung Fassadendetail und unvorhergesehene Bodenverhaeltnisse
+Tiefgarage. Mueller fordert 3 Wochen Bauzeitverlaengerung.
+Bauleiter Schmidt weist darauf hin, dass die Planlieferung am
+05.02.2024 erfolgt ist und der Verzug vor der Planlieferung begann.
+Die Behinderungsanzeige wird nach Eingang schriftlich beantwortet.
+
+TOP 2: Neue Maengel M-002 und M-003
+M-002: Fenster in Wohnung 3.04 (OG3, Nordseite) undicht. Bei
+Schlagregen Regenwassereintritt. Verantwortlich: Fassaden Kern AG.
+Herr Kern sagt Pruefung bis 16.02.2024 zu.
+M-003: Estrichhoehe im EG-Flur weicht um 12 mm von Sollhoehe ab.
+Niveauunterschied zur Tiefgaragenzufahrt problematisch (Barrierefreiheit).
+Verantwortlich: Mueller Bau. Frist: 28.02.2024.
+
+TOP 3: Nachtraege
+NT-001 (Tiefgarage Abdichtung, 45.000 EUR): genehmigt am 12.02.2024.
+NT-002 (Fassade Daemmung, 28.000 EUR): von Fassaden Kern eingereicht,
+Pruefung durch Bauleitung laeuft.
+NT-003 (Elektro Zusatzsteckdosen, 12.500 EUR): STRITTIG.
+Bauleiter Schmidt ist der Auffassung, dass die Leistung im Vertrag
+V-2024-003 enthalten ist (Pos. 04.12 Steckdosenausstattung).
+Herr Berger besteht auf Nachtragsberechtigung gemaess ss 2 Abs. 6 VOB/B.
+
+TOP 4: Terminplan
+Gesamtterminplan ist durch Verzoegerung Mueller Bau gefaehrdet.
+Rohbau-Fertigstellung 30.04.2024 kann bei aktuellem Tempo nicht
+gehalten werden. Schmidt fordert von Mueller verstaerkten
+Personaleinsatz ab KW 8.
+
+Naechster Termin: 26.02.2024, 10:00 Uhr
+
+Protokollant: Thomas Schmidt, Bauleiter
+Verteiler: alle Teilnehmer, Dr. Richter (Stadtpark Immobilien AG)`,
+  '/03_protokolle/planungsbesprechung/2024-01-10_planungsbesprechung_nr001.txt': `PROTOKOLL PLANUNGSBESPRECHUNG NR. 001
+Projekt: Sanierung Hochhaus am Stadtpark
+Datum: 10.01.2024, 14:00 Uhr
+Ort: Buero Architekturbuero Hoffmann + Partner
+
+Teilnehmer:
+- Maria Hoffmann (Architekturbuero Hoffmann + Partner)
+- Thomas Schmidt (Hochbau Schmidt GmbH, Bauleitung)
+- Dr. Klaus Richter (Stadtpark Immobilien AG, Bauherr)
+
+TOP 1: Ausfuehrungsplanung Status
+Grundrisse EG bis OG2 liegen in Version 2 vor. OG3 bis OG11 in
+Bearbeitung. Fassadendetails werden bis Ende Januar geliefert.
+Statische Nachweise gemaess Pruefbericht PSN-2023-0847 sind
+beruecksichtigt.
+
+TOP 2: Materialfreigaben
+Fensterprofil Schuecos ASS 70 FD freigegeben. Daemmplatten
+Mineralwolle WLG 035 freigegeben. Betonguete C30/37 fuer
+Tiefgarage bestaetigt.
+
+TOP 3: Bestandsaufnahme Ergebnisse
+Frau Hoffmann berichtet: Die Bestandsaufnahme zeigt in den Geschossen
+3 bis 5 staerkere Schaeden an der Tragstruktur als erwartet. Einzelne
+Stuetzen weisen Betonabplatzungen und freiliegende Bewehrung auf.
+Empfehlung: ergaenzende Sanierungsmassnahmen einplanen.
+Dies wird voraussichtlich einen Nachtrag zum Hauptvertrag V-2024-001
+erfordern (spaeter als Nachtrag Nr. 1 formalisiert).
+
+TOP 4: Naechste Schritte
+- Hoffmann liefert Grundriss OG3 bis 20.01.2024
+- Hoffmann liefert Fassadendetails bis 31.01.2024
+- Schmidt meldet Schadensbefund an Stadtpark AG
+
+Naechster Termin: 07.02.2024, 14:00 Uhr
+
+Protokollant: Maria Hoffmann
+Verteiler: alle Teilnehmer`,
+  '/03_protokolle/planungsbesprechung/2024-02-07_planungsbesprechung_nr002.txt': `PROTOKOLL PLANUNGSBESPRECHUNG NR. 002
+Projekt: Sanierung Hochhaus am Stadtpark
+Datum: 07.02.2024, 14:00 Uhr
+Ort: Buero Architekturbuero Hoffmann + Partner
+
+Teilnehmer:
+- Maria Hoffmann (Architekturbuero Hoffmann + Partner)
+- Thomas Schmidt (Hochbau Schmidt GmbH, Bauleitung)
+
+TOP 1: Fassade Planungsaenderung
+Aufgrund der am 01.02.2024 in Kraft getretenen Aenderung der
+Energieeinsparverordnung (EnEV) muss die Daemmstaerke der Fassade
+von 160 mm auf 200 mm erhoeht werden. Dies erfordert eine
+Planungsrevision der Fassadendetails und loest Nachtrag NT-002
+fuer Fassaden Kern AG aus.
+
+TOP 2: Grundriss-Anpassung OG3
+Grundriss OG3 wurde in Version 2 ueberarbeitet. Wohnung 3.04
+(Nordseite) erhaelt geaenderten Fenstereinteilung wegen
+Schallschutzanforderungen Stadtparkseite. Planlieferung an
+alle Gewerke erfolgt am 05.02.2024.
+
+TOP 3: Elektroplanung Revision
+Verteilerschema muss an geaenderten Grundriss OG3 angepasst
+werden. Betrifft Vertrag V-2024-003 (Elektro Berger). Aenderung
+der Leitungsfuehrung in Wohnungen 3.01 bis 3.06.
+
+TOP 4: Verschiedenes
+Frau Hoffmann weist auf ueberfaellige Planlieferung Fassadendetail
+hin — Lieferung erfolgte verspaetet am 05.02.2024 (Soll: 31.01.2024).
+Die Verspaetung koenne von Mueller Bau als Behinderungsgrund
+geltend gemacht werden.
+
+Naechster Termin: 21.02.2024, 14:00 Uhr
+
+Protokollant: Maria Hoffmann
+Verteiler: alle Teilnehmer`,
 
   // ── 04 Maengel (Defects / Punch Lists) ───────────────────────────
-  '/04_maengel/offen/mangel_001_riss_tiefgarage.txt': '',
-  '/04_maengel/offen/mangel_002_fenster_undicht_og3.txt': '',
-  '/04_maengel/offen/mangel_003_estrich_hoehe_eg.txt': '',
-  '/04_maengel/behoben/mangel_004_elektro_sicherungskasten.txt': '',
-  '/04_maengel/behoben/mangel_005_sanitaer_rohrbruch_ug.txt': '',
+  '/04_maengel/offen/mangel_001_riss_tiefgarage.txt': `MAENGELBERICHT
+Projekt: Sanierung Hochhaus am Stadtpark
+Mangel-Nr.: M-001
+
+Datum Feststellung: 28.01.2024
+Festgestellt durch: Thomas Schmidt, Bauleiter
+
+Ort: Tiefgarage, Deckenbereich Achse B3-C3
+Bauabschnitt: Tiefgarage
+
+Beschreibung:
+Riss in der Tiefgaragendecke, ca. 2 m Laenge, Richtung laengs zur
+Achse B3-C3. Der Riss ist nicht nur oberflaechlich — an mehreren
+Stellen ist Feuchtigkeit sichtbar. Rissbreite variiert zwischen
+0,3 mm und 0,8 mm. Verdacht auf Durchfeuchtung der Bodenplatte
+von oben (siehe auch NT-001).
+
+Verantwortliches Gewerk: Rohbau (Mueller Bau GmbH & Co. KG)
+Bezugsvertrag: V-2024-002
+
+Frist zur Beseitigung: 15.02.2024
+Rechtsgrundlage: ss 13 Abs. 5 Nr. 1 VOB/B (Maengelansprueche)
+
+Massnahmen:
+- Gutachterliche Untersuchung angeordnet (Ergebnis ausstehend)
+- Fotodokumentation angelegt (Anlage M-001-Fotos)
+- Maengelruege an Mueller Bau versendet am 01.02.2024
+
+Status: OFFEN
+
+_________________________
+Thomas Schmidt, Bauleiter
+Hochbau Schmidt GmbH`,
+  '/04_maengel/offen/mangel_002_fenster_undicht_og3.txt': `MAENGELBERICHT
+Projekt: Sanierung Hochhaus am Stadtpark
+Mangel-Nr.: M-002
+
+Datum Feststellung: 08.02.2024
+Festgestellt durch: Thomas Schmidt, Bauleiter
+
+Ort: Wohnung 3.04, 3. Obergeschoss, Nordseite
+Bauabschnitt: Fassade / Fenster
+
+Beschreibung:
+Fenster in Wohnung 3.04 (Nordseite) undicht. Bei Schlagregen tritt
+Regenwasser im unteren Blendrahmenbereich ein. Wasserspuren an der
+Fensterbank und am angrenzenden Putz sichtbar. Vermutliche Ursache:
+fehlerhafte Abdichtung der Fenstermontage im Bereich der unteren
+Anschlussfuge (RAL-Montage nicht eingehalten).
+
+Verantwortliches Gewerk: Fassade (Fassaden Kern AG)
+Bezugsvertrag: V-2024-005
+
+Frist zur Beseitigung: 22.02.2024
+Rechtsgrundlage: ss 13 Abs. 5 Nr. 1 VOB/B (Maengelansprueche)
+
+Massnahmen:
+- Sofortmassnahme: provisorische Abdichtung mit Klebeband
+- Pruefung der uebrigen Fenster OG3 Nordseite angeordnet
+- Fassaden Kern AG zur Stellungnahme aufgefordert
+
+Status: OFFEN
+
+_________________________
+Thomas Schmidt, Bauleiter
+Hochbau Schmidt GmbH`,
+  '/04_maengel/offen/mangel_003_estrich_hoehe_eg.txt': `MAENGELBERICHT
+Projekt: Sanierung Hochhaus am Stadtpark
+Mangel-Nr.: M-003
+
+Datum Feststellung: 10.02.2024
+Festgestellt durch: Maria Hoffmann, Architektin (Objektueberwachung)
+
+Ort: Erdgeschoss, Flurbereich vor Aufzug / Zugang Tiefgarage
+Bauabschnitt: Rohbau / Estrich
+
+Beschreibung:
+Die Estrichhoehe im EG-Flur weicht um 12 mm von der Sollhoehe
+(OKFF +0,00) ab. An der Uebergangsstelle zur Tiefgaragenzufahrt
+entsteht ein Niveauunterschied, der die Barrierefreiheit
+beeintraechtigt. Die Schwelle ueberschreitet die zulässige Hoehe
+von 20 mm gemaess DIN 18040-2 (barrierefreies Bauen).
+
+Verantwortliches Gewerk: Rohbau (Mueller Bau GmbH & Co. KG)
+Bezugsvertrag: V-2024-002
+
+Frist zur Beseitigung: 28.02.2024
+Rechtsgrundlage: ss 13 Abs. 5 Nr. 1 VOB/B (Maengelansprueche)
+
+Massnahmen:
+- Nivellierungsmessung durchgefuehrt (Protokoll liegt vor)
+- Ausgleich durch Nacharbeiten am Estrich erforderlich
+- Mueller Bau zur Nachbesserung aufgefordert
+
+Status: OFFEN
+
+_________________________
+Thomas Schmidt, Bauleiter
+Hochbau Schmidt GmbH`,
+  '/04_maengel/behoben/mangel_004_elektro_sicherungskasten.txt': `MAENGELBERICHT
+Projekt: Sanierung Hochhaus am Stadtpark
+Mangel-Nr.: M-004
+
+Datum Feststellung: 22.01.2024
+Festgestellt durch: Thomas Schmidt, Bauleiter
+Datum Beseitigung: 25.01.2024
+
+Ort: Untergeschoss, Hauptverteilung / Sicherungskasten TG
+Bauabschnitt: Elektroinstallation
+
+Beschreibung:
+Sicherungskasten im UG (Technikraum Tiefgarage) falsch verdrahtet.
+Der FI-Schutzschalter (RCD 30mA) fuer den Stromkreis Tiefgarage
+war nicht normkonform angeschlossen — Neutralleiter und Schutzleiter
+vertauscht. Bei Pruefung durch Bauleiter Schmidt mittels
+Schleifenimpedanzmessung festgestellt.
+
+Verantwortliches Gewerk: Elektro (Elektro Berger OHG)
+Bezugsvertrag: V-2024-003
+
+Durchgefuehrte Beseitigung:
+- Korrekte Verdrahtung des FI-Schutzschalters am 25.01.2024
+- Pruefung aller RCD-Stromkreise im UG
+- Messprotokoll nach DIN VDE 0100-600 erstellt
+
+Abnahme der Maengelbeseitigung:
+Durch Bauleiter Schmidt am 25.01.2024 abgenommen.
+Messprotokoll liegt vor. Maengel beseitigt.
+
+Status: BEHOBEN
+
+_________________________
+Thomas Schmidt, Bauleiter
+Hochbau Schmidt GmbH`,
+  '/04_maengel/behoben/mangel_005_sanitaer_rohrbruch_ug.txt': `MAENGELBERICHT
+Projekt: Sanierung Hochhaus am Stadtpark
+Mangel-Nr.: M-005
+
+Datum Feststellung: 03.02.2024
+Festgestellt durch: Peter Weber, Sanitaer Weber GmbH
+Datum Beseitigung: 04.02.2024
+
+Ort: Untergeschoss, Technikraum, Kaltwasser-Hauptleitung
+Bauabschnitt: Sanitaerinstallation
+
+Beschreibung:
+Rohrbruch an der Kaltwasserleitung DN 50 im UG-Technikraum.
+Bruchstelle an einer Verschraubung (Altbestand, Stahlrohr
+verzinkt). Wasseraustritt ca. 2 Liter/Minute. Schaden wurde
+bei Routinekontrolle durch Herrn Weber entdeckt.
+
+Verantwortliches Gewerk: Sanitaer (Sanitaer Weber GmbH)
+Bezugsvertrag: V-2024-004
+
+Durchgefuehrte Beseitigung:
+Sofortmassnahme (03.02.2024):
+- Absperrung Kaltwasser-Hauptleitung
+- Provisorische Reparatur mit Reparaturschelle
+
+Regulaere Reparatur (04.02.2024):
+- Austausch des defekten Rohrabschnitts (ca. 1,5 m)
+- Einbau neuer Edelstahl-Pressfittings
+- Druckpruefung mit 10 bar, 30 Minuten, dicht
+
+Abnahme der Maengelbeseitigung:
+Durch Bauleiter Schmidt am 04.02.2024 abgenommen.
+Druckpruefprotokoll liegt vor. Maengel beseitigt.
+
+Status: BEHOBEN
+
+_________________________
+Thomas Schmidt, Bauleiter
+Hochbau Schmidt GmbH`,
 
   // ── 05 Plaene (Plans / Drawings) ─────────────────────────────────
   '/05_plaene/grundrisse/grundriss_eg_v3.txt': '',
@@ -504,19 +875,363 @@ Sanitaer Weber GmbH`,
   '/05_plaene/details/detail_tiefgarage_abdichtung.txt': '',
 
   // ── 06 Schriftverkehr (Correspondence) ───────────────────────────
-  '/06_schriftverkehr/eingehend/2024-01-20_stadtpark_ag_freigabe_rohbau.txt': '',
-  '/06_schriftverkehr/eingehend/2024-02-05_archbuero_hoffmann_planlieferung.txt': '',
-  '/06_schriftverkehr/eingehend/2024-02-15_mueller_bau_behinderungsanzeige.txt': '',
-  '/06_schriftverkehr/ausgehend/2024-01-18_schmidt_an_stadtpark_ag_terminplan.txt': '',
-  '/06_schriftverkehr/ausgehend/2024-02-01_schmidt_an_mueller_bau_maengelruege.txt': '',
-  '/06_schriftverkehr/ausgehend/2024-02-10_schmidt_an_elektro_berger_nachforderung.txt': '',
+  '/06_schriftverkehr/eingehend/2024-01-20_stadtpark_ag_freigabe_rohbau.txt': `Stadtpark Immobilien AG
+Kurfuerstendamm 42, 10719 Berlin
+
+An:
+Hochbau Schmidt GmbH
+Herrn Thomas Schmidt
+Berliner Strasse 17, 10715 Berlin
+
+Berlin, den 20.01.2024
+
+Betreff: Freigabe Rohbauarbeiten
+Bezug: Hauptvertrag V-2024-001 vom 15.12.2023, ss 3
+
+Sehr geehrter Herr Schmidt,
+
+nach Pruefung der von Architekturbuero Hoffmann + Partner vorgelegten
+Ausfuehrungsplanung (Planstand Januar 2024) erteilen wir hiermit die
+Freigabe fuer den Beginn der Rohbauarbeiten gemaess Vertrag V-2024-001 ss 3.
+
+Die Freigabe umfasst die Positionen 01.01 bis 01.48 des
+Leistungsverzeichnisses (Nachunternehmervertrag V-2024-002, Mueller Bau).
+
+Bitte beachten Sie die Auflagen aus dem Pruefbericht Standsicherheit
+(PSN-2023-0847), insbesondere die Abstuetzungsvorschriften fuer die
+Stuetzen Achse B2 bis B8.
+
+Mit freundlichen Gruessen
+
+Dr. Klaus Richter
+Vorstand, Stadtpark Immobilien AG`,
+  '/06_schriftverkehr/eingehend/2024-02-05_archbuero_hoffmann_planlieferung.txt': `Architekturbuero Hoffmann + Partner
+Savignyplatz 3, 10623 Berlin
+
+An:
+Hochbau Schmidt GmbH
+Herrn Thomas Schmidt
+Berliner Strasse 17, 10715 Berlin
+
+Berlin, den 05.02.2024
+
+Betreff: Planlieferung — ueberarbeitete Zeichnungen
+Bezug: Planungsbesprechung vom 10.01.2024
+
+Sehr geehrter Herr Schmidt,
+
+hiermit ueberreichen wir Ihnen folgende ueberarbeitete Planunterlagen:
+
+1. Grundriss OG3, Version 2 (Zeichnungs-Nr. A-GR-OG3-v2)
+   — Geaenderte Fenstereinteilung Wohnung 3.04 (Nordseite)
+   — Anpassung Elektroverteilung Wohnungen 3.01 bis 3.06
+2. Fassadendetail, Version 4 (Zeichnungs-Nr. A-FD-01-v4)
+   — Aktualisierte Daemmstaerke 200mm gemaess EnEV-Aenderung
+   — Ueberarbeitete Fensteranschlussdetails
+
+Hinweis: Die Lieferung des Fassadendetails erfolgt mit 5 Tagen
+Verspaetung gegenueber dem vereinbarten Termin (Soll: 31.01.2024).
+Wir bitten die Verzoegerung zu entschuldigen.
+
+Bitte verteilen Sie die Plaene an die betroffenen Gewerke.
+
+Mit freundlichen Gruessen
+
+Maria Hoffmann
+Architekturbuero Hoffmann + Partner`,
+  '/06_schriftverkehr/eingehend/2024-02-15_mueller_bau_behinderungsanzeige.txt': `Mueller Bau GmbH & Co. KG
+Industriestrasse 5, 12099 Berlin
+
+An:
+Hochbau Schmidt GmbH
+Herrn Thomas Schmidt
+Berliner Strasse 17, 10715 Berlin
+
+Berlin, den 15.02.2024
+
+Betreff: Behinderungsanzeige gemaess ss 6 Abs. 1 VOB/B
+Bezug: Nachunternehmervertrag V-2024-002 vom 18.12.2023
+
+Sehr geehrter Herr Schmidt,
+
+hiermit zeigen wir Ihnen gemaess ss 6 Abs. 1 VOB/B an, dass die
+Ausfuehrung unserer Rohbauarbeiten behindert ist. Die Behinderung
+ergibt sich aus folgenden Umstaenden:
+
+a) Verspaetete Planlieferung Fassadendetail
+   Die fuer den 31.01.2024 zugesagte Lieferung des Fassadendetails
+   (Zeichnung A-FD-01) erfolgte erst am 05.02.2024. Dadurch konnten
+   die Anschlussarbeiten Rohbau/Fassade nicht termingerecht begonnen
+   werden.
+
+b) Unvorhergesehene Bodenverhaeltnisse Tiefgarage
+   Die bei den Abbrucharbeiten festgestellten Durchfeuchtungen und
+   Schaeden an der Bodenplatte der Tiefgarage (vgl. Mangel M-001)
+   waren aus den Bestandsunterlagen nicht ersichtlich und erfordern
+   zusaetzliche Abdichtungsarbeiten (Nachtrag NT-001).
+
+Aufgrund der vorgenannten Behinderungen fordern wir eine
+Bauzeitverlaengerung von 3 Wochen gemaess ss 6 Abs. 4 VOB/B.
+
+Wir behalten uns ausdruecklich Schadensersatzansprueche und
+Mehrkostenansprueche vor.
+
+Mit freundlichen Gruessen
+
+Hans Mueller
+Prokurist, Mueller Bau GmbH & Co. KG`,
+  '/06_schriftverkehr/ausgehend/2024-01-18_schmidt_an_stadtpark_ag_terminplan.txt': `Hochbau Schmidt GmbH
+Berliner Strasse 17, 10715 Berlin
+
+An:
+Stadtpark Immobilien AG
+Dr. Klaus Richter
+Kurfuerstendamm 42, 10719 Berlin
+
+Berlin, den 18.01.2024
+
+Betreff: Uebersendung aktualisierter Bauzeitenplan
+Bezug: Hauptvertrag V-2024-001 vom 15.12.2023
+
+Sehr geehrter Herr Dr. Richter,
+
+hiermit ueberreichen wir Ihnen den aktualisierten Bauzeitenplan
+fuer das Projekt Sanierung Hochhaus am Stadtpark.
+
+Meilensteine:
+- Rohbau fertiggestellt: 15.03.2024
+- Fassade fertiggestellt: 15.06.2024
+- Haustechnik fertiggestellt: 31.07.2024
+- Innenausbau fertiggestellt: 15.09.2024
+- Gesamtfertigstellung / Abnahme: 30.09.2024
+
+Der Bauzeitenplan beruecksichtigt die vertraglich vereinbarten
+Zwischentermine gemaess V-2024-001 ss 4. Alle Nachunternehmer
+sind vertraglich gebunden und haben ihre Leistungsbereitschaft
+bestaetigt.
+
+Der detaillierte Balkenplan (Anlage) zeigt die Abhaengigkeiten
+zwischen den Gewerken.
+
+Mit freundlichen Gruessen
+
+Thomas Schmidt
+Geschaeftsfuehrer, Hochbau Schmidt GmbH`,
+  '/06_schriftverkehr/ausgehend/2024-02-01_schmidt_an_mueller_bau_maengelruege.txt': `Hochbau Schmidt GmbH
+Berliner Strasse 17, 10715 Berlin
+
+An:
+Mueller Bau GmbH & Co. KG
+Herrn Hans Mueller
+Industriestrasse 5, 12099 Berlin
+
+Berlin, den 01.02.2024
+
+Betreff: Maengelruege gemaess ss 13 Abs. 5 VOB/B — Mangel M-001
+Bezug: Nachunternehmervertrag V-2024-002 vom 18.12.2023
+
+Sehr geehrter Herr Mueller,
+
+hiermit ruegen wir folgenden Mangel an Ihren Rohbauarbeiten
+gemaess ss 13 Abs. 5 Nr. 1 VOB/B:
+
+Mangel M-001: Riss in der Tiefgaragendecke
+Ort: Achse B3-C3, ca. 2 m Laenge
+Festgestellt am: 28.01.2024
+
+Der Riss wurde im Rahmen der Bauueberwachung festgestellt und
+ist augenscheinlich nicht nur oberflaechlich. An der Rissstelle
+sind Feuchtigkeitsspuren erkennbar. Eine gutachterliche
+Untersuchung ist angeordnet.
+
+Wir setzen Ihnen hiermit eine Frist zur Maengelbeseitigung
+bis zum 15.02.2024.
+
+Sollte die Frist fruchtlos verstreichen, behalten wir uns vor,
+die Maengelbeseitigung im Wege der Ersatzvornahme auf Ihre
+Kosten durchfuehren zu lassen (ss 13 Abs. 5 Nr. 2 VOB/B).
+
+Mit freundlichen Gruessen
+
+Thomas Schmidt
+Geschaeftsfuehrer, Hochbau Schmidt GmbH`,
+  '/06_schriftverkehr/ausgehend/2024-02-10_schmidt_an_elektro_berger_nachforderung.txt': `Hochbau Schmidt GmbH
+Berliner Strasse 17, 10715 Berlin
+
+An:
+Elektro Berger OHG
+Herrn Frank Berger
+Siemensstrasse 12, 10551 Berlin
+
+Berlin, den 10.02.2024
+
+Betreff: Ablehnung Nachtrag NT-003 — Zusaetzliche Steckdosen
+Bezug: Nachunternehmervertrag V-2024-003 vom 19.12.2023
+
+Sehr geehrter Herr Berger,
+
+wir nehmen Bezug auf Ihr Nachtragsangebot NT-003 vom 20.02.2024
+ueber 12.500,00 EUR netto fuer zusaetzliche Steckdosen und
+Datenanschluesse je Wohneinheit.
+
+Nach eingehender Pruefung des Leistungsverzeichnisses weisen wir
+Ihre Nachforderung zurueck. Die geforderten Leistungen sind
+unserer Auffassung nach bereits im Vertrag V-2024-003 enthalten:
+
+Position 4.3.1 des Leistungsverzeichnisses sieht eine
+"Steckdosenausstattung je Wohneinheit nach aktuellem Standard"
+vor. Der aktuelle Standard (DIN 18015-2) fordert mindestens
+die von Ihnen als Nachtrag angebotene Ausstattung.
+
+Wir fordern Sie auf, die Leistungen im Rahmen des bestehenden
+Vertrags V-2024-003 ss 2 auszufuehren, ohne Nachforderung.
+
+Sollten Sie an Ihrer Nachtragsforderung festhalten, behalten wir
+uns die Einholung einer juristischen Stellungnahme vor.
+
+Mit freundlichen Gruessen
+
+Thomas Schmidt
+Geschaeftsfuehrer, Hochbau Schmidt GmbH`,
 
   // ── 07 Bautagebuch (Daily Construction Logs) ─────────────────────
-  '/07_bautagebuch/2024-01-15_bautagebuch.txt': '',
-  '/07_bautagebuch/2024-01-16_bautagebuch.txt': '',
-  '/07_bautagebuch/2024-01-17_bautagebuch.txt': '',
-  '/07_bautagebuch/2024-02-01_bautagebuch.txt': '',
-  '/07_bautagebuch/2024-02-02_bautagebuch.txt': '',
+  '/07_bautagebuch/2024-01-15_bautagebuch.txt': `BAUTAGEBUCH
+Projekt: Sanierung Hochhaus am Stadtpark
+Datum: 15.01.2024 (Montag)
+
+Wetter: bewoelkt, 3°C, trocken, Wind schwach
+
+Arbeitskraefte:
+- Mueller Bau (Rohbau): 8 Mann — Abbrucharbeiten EG
+- Elektro Berger (Elektro): 2 Mann — Bestandsaufnahme Elektro UG
+Gesamtstaerke: 10 Arbeitskraefte
+
+Geraete:
+- Kleinbagger CAT 301.7, Presslufthammer, Stemmhammer elektr.
+
+Ausgefuehrte Arbeiten:
+- Abbrucharbeiten EG: Entkernung Wohnungen EG01-EG04 begonnen
+- Elektro: Bestandsaufnahme Altinstallation UG, Dokumentation
+  vorhandener Leitungsfuehrung
+- Erste Baubesprechung Nr. 001 durchgefuehrt (10:00 Uhr)
+
+Besondere Vorkommnisse:
+Keine. Bauablauf planmaessig.
+
+Anlieferungen:
+- Container-Entsorgung (2x Mulde 10m3)
+
+_________________________
+Thomas Schmidt, Bauleiter`,
+  '/07_bautagebuch/2024-01-16_bautagebuch.txt': `BAUTAGEBUCH
+Projekt: Sanierung Hochhaus am Stadtpark
+Datum: 16.01.2024 (Dienstag)
+
+Wetter: Regen (Dauerregen seit 06:00), 2°C, Wind maessig
+
+Arbeitskraefte:
+- Mueller Bau (Rohbau): 6 Mann — Abbrucharbeiten eingeschraenkt
+Gesamtstaerke: 6 Arbeitskraefte (reduziert)
+
+Geraete:
+- Stemmhammer elektr. (Innenbereich)
+
+Ausgefuehrte Arbeiten:
+- Abbrucharbeiten nur im Innenbereich moeglich (EG05-EG06)
+- Arbeiten im Aussenbereich ruhen wegen Naesse
+
+Besondere Vorkommnisse:
+Dauerregen seit frueh morgens. Aussenarbeiten nicht moeglich.
+Mueller Bau hat 2 Mann nach Hause geschickt. Verzoegerung
+gegenueber Terminplan moeglich bei anhaltendem Regen.
+
+_________________________
+Thomas Schmidt, Bauleiter`,
+  '/07_bautagebuch/2024-01-17_bautagebuch.txt': `BAUTAGEBUCH
+Projekt: Sanierung Hochhaus am Stadtpark
+Datum: 17.01.2024 (Mittwoch)
+
+Wetter: trocken, 1°C, bewoelkt, Wind schwach
+
+Arbeitskraefte:
+- Mueller Bau (Rohbau): 8 Mann — Betonarbeiten Tiefgarage
+- Elektro Berger (Elektro): 3 Mann — Demontage Altinstallation
+Gesamtstaerke: 11 Arbeitskraefte
+
+Geraete:
+- Betonmischer, Ruettelflasche, Stemmhammer
+
+Ausgefuehrte Arbeiten:
+- Betonarbeiten Tiefgarage aufgenommen (Bodenplatte Abschnitt 1)
+- Demontage Altinstallation Elektro OG1 begonnen
+- Entsorgung Abbruchmaterial von gestern
+
+Besondere Vorkommnisse:
+Keine. Arbeiten wieder im Normalbetrieb nach Regentag gestern.
+
+_________________________
+Thomas Schmidt, Bauleiter`,
+  '/07_bautagebuch/2024-02-01_bautagebuch.txt': `BAUTAGEBUCH
+Projekt: Sanierung Hochhaus am Stadtpark
+Datum: 01.02.2024 (Donnerstag)
+
+Wetter: sonnig, 5°C, trocken, Wind schwach
+
+Arbeitskraefte:
+- Mueller Bau (Rohbau): 6 Mann — Betonarbeiten TG (reduzierte Staerke)
+- Elektro Berger (Elektro): 3 Mann — Kabelverlegung OG1
+- Sanitaer Weber (Sanitaer): 2 Mann — Demontage Altleitungen UG
+Gesamtstaerke: 11 Arbeitskraefte
+
+Geraete:
+- Betonmischer, Kernbohrgeraet, Rohrschneider
+
+Ausgefuehrte Arbeiten:
+- Betonarbeiten Tiefgarage Abschnitt 2 (Bodenplatte)
+- Elektro: Kabelverlegung Steigeleitung OG1
+- Sanitaer: Demontage Altleitungen Heizung UG
+
+Besondere Vorkommnisse:
+Bauleiter Schmidt stellt bei Kontrollgang Riss in der TG-Decke
+fest (Achse B3-C3, ca. 2 m Laenge). Mangel als M-001 erfasst.
+Fotodokumentation angelegt. Maengelruege an Mueller Bau wird
+vorbereitet und am selben Tag versendet.
+
+Mueller Bau mit nur 6 statt planmaessig 10 Mann vor Ort.
+Herr Mueller begruendet mit Krankheitsausfaellen.
+
+_________________________
+Thomas Schmidt, Bauleiter`,
+  '/07_bautagebuch/2024-02-02_bautagebuch.txt': `BAUTAGEBUCH
+Projekt: Sanierung Hochhaus am Stadtpark
+Datum: 02.02.2024 (Freitag)
+
+Wetter: bewoelkt, 4°C, trocken, Wind maessig
+
+Arbeitskraefte:
+- Mueller Bau (Rohbau): 7 Mann — Betonarbeiten TG
+- Elektro Berger (Elektro): 2 Mann — Kabelverlegung OG1
+- Sanitaer Weber (Sanitaer): 4 Mann — Rohrinstallation UG
+Gesamtstaerke: 13 Arbeitskraefte
+
+Geraete:
+- Betonmischer, Schweissgeraet, Rohrbieger, Presszange
+
+Ausgefuehrte Arbeiten:
+- Betonarbeiten TG-Decke Abschnitt 2 fortgesetzt
+- Elektro: Verteiler OG1 vormontiert
+- Sanitaer: Rohrinstallation Kaltwasser UG begonnen
+
+Besondere Vorkommnisse:
+Rohrbruch Kaltwasserleitung DN 50 im UG-Technikraum festgestellt
+(Mangel M-005). Bruchstelle an Verschraubung Altbestand.
+Sofortmassnahme: Wasserabsperrung und provisorische Reparatur
+durch Sanitaer Weber. Regulaere Reparatur fuer morgen (03.02.)
+geplant — Korrektur: Reparatur auf 04.02. verschoben (Samstag
+keine Arbeiten).
+
+_________________________
+Thomas Schmidt, Bauleiter`,
 
   // ── 08 Rechnungen (Invoices) ─────────────────────────────────────
   '/08_rechnungen/geprueft/re_mueller_bau_abschlag_01.txt': '',
