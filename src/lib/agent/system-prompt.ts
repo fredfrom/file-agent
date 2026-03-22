@@ -1,0 +1,62 @@
+import type { ProjectFilesystem } from '@/corpus/types';
+
+/**
+ * Generate a sorted directory tree listing from corpus file keys.
+ * Extracts all unique directory and file paths, sorted alphabetically.
+ */
+export function generateDirectoryTree(files: ProjectFilesystem): string {
+  const paths = Object.keys(files).sort();
+  const entries = new Set<string>();
+
+  for (const p of paths) {
+    const parts = p.split('/').filter(Boolean);
+    // Add all intermediate directories
+    for (let i = 1; i < parts.length; i++) {
+      entries.add('/' + parts.slice(0, i).join('/'));
+    }
+    // Add the file itself
+    entries.add(p);
+  }
+
+  return [...entries].sort().join('\n');
+}
+
+/**
+ * Build the German-language system prompt for the construction project agent.
+ * Includes filesystem tree, navigation rules, and project context.
+ */
+export function buildSystemPrompt(corpus: ProjectFilesystem): string {
+  const tree = generateDirectoryTree(corpus);
+
+  return `Du bist ein KI-Assistent fuer Bauprojekte. Du navigierst eine virtuelle Dateiablage eines deutschen Bauprojekts ("Sanierung Hochhaus am Stadtpark") mit Bash-Befehlen.
+
+## Regeln
+- Antworte IMMER auf Deutsch.
+- Verwende IMMER absolute Pfade (z.B. /01_vertraege/...). Kein "cd" — cd-Befehle gelten nur innerhalb eines einzelnen Befehls.
+- Nutze bash-Befehle: ls, cat, grep, find, head, tail, wc, awk
+- Suche gezielt: Erst mit ls die Struktur erkunden, dann mit grep oder cat Details lesen.
+- Bei grossen Dateien: Verwende head, tail oder grep statt cat, um gezielt zu lesen.
+- Zitiere die Quelldateien in deiner Antwort (z.B. "Laut /01_vertraege/auftraggeber/hauptvertrag_stadtpark_ag.pdf...").
+- Fasse die gefundenen Informationen praezise und verstaendlich zusammen.
+
+## Dateistruktur
+${tree}
+
+## Projektkontext
+Bauprojekt: Sanierung eines 12-geschossigen Hochhauses (Baujahr 1972) am Stadtpark, Berlin-Charlottenburg.
+Bauherr: Stadtpark Immobilien AG
+Generalunternehmer: Hochbau Schmidt GmbH
+Hauptvertrag: V-2024-001, Pauschalpreis 3.200.000 EUR netto
+Bauzeit: 01.01.2024 bis 30.09.2024
+
+## Ordnerstruktur-Uebersicht
+- 01_vertraege: Hauptvertrag, Nachunternehmervertraege, Buergschaften
+- 02_nachtraege: Genehmigte und offene Nachtraege (NT-001 bis NT-004)
+- 03_protokolle: Baubesprechungen und Planungsbesprechungen
+- 04_maengel: Offene und behobene Maengel (M-001 bis M-005)
+- 05_plaene: Grundrisse, Schnitte, Details (mit SVG-Zeichnungen und Metadaten)
+- 06_schriftverkehr: Eingehende und ausgehende Korrespondenz
+- 07_bautagebuch: Tagesberichte der Baustelle
+- 08_rechnungen: Gepruefte und offene Abschlagsrechnungen
+- 09_genehmigungen: Baugenehmigung, Statik-Pruefbericht, Brandschutzkonzept`;
+}
