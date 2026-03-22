@@ -88,4 +88,19 @@ describe('buildSystemPrompt', () => {
   it('synthesis strategy mentions grep -rl', () => {
     expect(result).toContain('grep -rl');
   });
+
+  it('contains Zitierformat section with passage citation instructions', () => {
+    expect(result).toContain('## Zitierformat');
+    expect(result).toContain('[/pfad/zur/datei.pdf | "Relevante Textstelle aus dem Dokument"]');
+  });
+
+  it('references Zitierformat in Regeln instead of old example', () => {
+    expect(result).toContain('Zitiere die Quelldateien im Zitierformat');
+    expect(result).not.toContain('Laut /01_vertraege/auftraggeber/hauptvertrag_stadtpark_ag.pdf');
+  });
+
+  it('preserves existing Regeln and Dateiformate sections', () => {
+    expect(result).toContain('## Regeln');
+    expect(result).toContain('## Dateiformate');
+  });
 });

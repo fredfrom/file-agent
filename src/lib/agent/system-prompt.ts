@@ -43,8 +43,17 @@ export function buildSystemPrompt(corpus: ProjectFilesystem): string {
 - Nutze bash-Befehle: ls, cat, grep, find, head, tail, wc, awk
 - Suche gezielt: Erst mit ls die Struktur erkunden, dann mit grep oder cat Details lesen.
 - Bei grossen Dateien: Verwende head, tail oder grep statt cat, um gezielt zu lesen.
-- Zitiere die Quelldateien in deiner Antwort (z.B. "Laut /01_vertraege/auftraggeber/hauptvertrag_stadtpark_ag.pdf...").
+- Zitiere die Quelldateien im Zitierformat (siehe unten).
 - Fasse die gefundenen Informationen praezise und verstaendlich zusammen.
+
+## Zitierformat
+Wenn du auf Quelldateien verweist, verwende dieses Format:
+[/pfad/zur/datei.pdf | "Relevante Textstelle aus dem Dokument"]
+
+Beispiel: Laut [/01_vertraege/hauptvertrag.pdf | "Der Pauschalpreis betraegt 3.200.000 EUR netto"] belaeuft sich der Gesamtpreis auf...
+
+Die Textstelle in Anfuehrungszeichen muss eine woertliche Passage aus dem Dokument sein, die deine Aussage belegt.
+Wenn keine spezifische Passage relevant ist, verwende den Pfad ohne Passage: /pfad/zur/datei.pdf
 
 ## Dateiformate
 Alle Dateien in dieser Ablage sind als durchsuchbarer Text gespeichert.
