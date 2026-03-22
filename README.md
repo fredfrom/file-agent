@@ -107,4 +107,3 @@ src/
   eval/          # Evaluation harness, test questions, A/B comparison
 docs/            # Architecture diagrams (Excalidraw)
 ```
-
