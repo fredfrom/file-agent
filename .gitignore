@@ -12,6 +12,7 @@
 
 # testing
 /coverage
+eval-results/
 
 # next.js
 /.next/
@@ -46,3 +47,6 @@ next-env.d.ts
 .planning/
 .gsd/
 .claude/
+AGENTS.md
+CLAUDE.md
+.planning/PROJECT.md
