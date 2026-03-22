@@ -51,28 +51,27 @@ describe('UI-03: visible agent trace', () => {
 // --- UI-04: Syntax highlighting ---
 
 describe('UI-04: syntax highlighting', () => {
-  it('has green command prompt styling', () => {
-    expect(toolTraceSource).toContain('green');
+  it('describes commands in German for non-technical users', () => {
+    expect(toolTraceSource).toContain('Lese');
+    expect(toolTraceSource).toContain('Suche');
+    expect(toolTraceSource).toContain('Durchsuche');
   });
 
-  it('has dark terminal background', () => {
-    expect(toolTraceSource).toContain('bg-[');
-  });
-
-  it('uses monospace font', () => {
-    expect(toolTraceSource).toContain('font-mono');
-  });
-
-  it('has command line header background', () => {
-    expect(toolTraceSource).toContain('border-b');
-  });
-
-  it('uses pre element for output', () => {
+  it('has expandable output section', () => {
+    expect(toolTraceSource).toContain('expanded');
     expect(toolTraceSource).toContain('<pre');
   });
 
-  it('has German running state text', () => {
-    expect(toolTraceSource).toContain('Ausfuehren');
+  it('uses monospace font for raw output', () => {
+    expect(toolTraceSource).toContain('font-mono');
+  });
+
+  it('shows animated loading state', () => {
+    expect(toolTraceSource).toContain('animate-pulse');
+  });
+
+  it('shows result count summary', () => {
+    expect(toolTraceSource).toContain('Ergebnis');
   });
 });
 

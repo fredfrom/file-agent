@@ -29,7 +29,7 @@ export function Chat() {
         <div>
           <h1 className="text-base font-semibold tracking-tight">Bauakte Agent</h1>
           <p className="text-xs text-[var(--muted)]">
-            Dokumentennavigation via Bash
+            Ihr KI-Assistent fuer Projektdokumente
           </p>
         </div>
         <div className="ml-auto flex items-center gap-2">
@@ -48,10 +48,10 @@ export function Chat() {
               <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-[var(--surface-2)] border border-[var(--border)] mx-auto">
                 <FolderTree size={28} className="text-[var(--accent)]" />
               </div>
-              <h2 className="text-lg font-medium">Bauprojekt durchsuchen</h2>
+              <h2 className="text-lg font-medium">Fragen Sie zur Bauakte</h2>
               <p className="text-sm text-[var(--muted)] max-w-md">
-                Stellen Sie eine Frage und der Agent navigiert die Projektdokumente
-                per Bash-Befehle.
+                Stellen Sie eine Frage zu Ihrem Bauprojekt. Der Assistent
+                durchsucht alle Projektdokumente und liefert Ihnen die Antwort.
               </p>
             </div>
             <ExampleQuestions onSelect={(q) => sendMessage({ text: q })} />
@@ -70,11 +70,6 @@ export function Chat() {
                   : 'w-full space-y-2'
               }`}
             >
-              {message.role === 'assistant' && (
-                <span className="text-[10px] font-medium uppercase tracking-wider text-[var(--muted)]">
-                  Agent
-                </span>
-              )}
               {message.parts.map((part, i) => {
                 try {
                   if (part.type === 'text') {
@@ -145,7 +140,7 @@ export function Chat() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               disabled={isDisabled}
-              placeholder="Frage zum Bauprojekt stellen..."
+              placeholder="z.B. Welche Nachtraege sind noch offen?"
               className="flex-1 bg-transparent py-2.5 text-sm placeholder:text-[var(--muted)] focus:outline-none disabled:opacity-50"
             />
             <button
@@ -158,7 +153,7 @@ export function Chat() {
             </button>
           </div>
           <p className="text-[10px] text-[var(--muted)] mt-2 text-center">
-            Der Agent navigiert Dokumente per ls, cat, grep, find
+            Vertraege, Protokolle, Maengel, Rechnungen und mehr
           </p>
         </form>
       </div>
