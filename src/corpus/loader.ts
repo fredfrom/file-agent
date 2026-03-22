@@ -77,7 +77,7 @@ async function parsePdf(buffer: Buffer): Promise<string> {
  */
 async function parseExcel(buffer: Buffer): Promise<string> {
   const workbook = new ExcelJS.Workbook();
-  await workbook.xlsx.load(buffer);
+  await workbook.xlsx.load(buffer as unknown as ExcelJS.Buffer);
   const lines: string[] = [];
 
   workbook.eachSheet((sheet) => {
