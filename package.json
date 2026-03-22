@@ -23,7 +23,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "eval": "tsx --env-file=.env.local src/eval/run.ts",
-    "eval:compare": "tsx --env-file=.env.local src/eval/compare-run.ts"
+    "eval:compare": "tsx --env-file=.env.local src/eval/compare-run.ts",
+    "postinstall": "node -e \"const fs=require('fs'),p='node_modules/bash-tool/package.json',d=JSON.parse(fs.readFileSync(p));d.exports['.'].default=d.exports['.'].import;fs.writeFileSync(p,JSON.stringify(d,null,2))\" 2>/dev/null || true"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^3.0.63",
