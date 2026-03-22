@@ -22,8 +22,8 @@
     "lint": "eslint",
     "test": "vitest run",
     "test:watch": "vitest",
-    "eval": "npx tsx src/eval/run.ts",
-    "eval:compare": "npx tsx src/eval/compare-run.ts"
+    "eval": "tsx --env-file=.env.local src/eval/run.ts",
+    "eval:compare": "tsx --env-file=.env.local src/eval/compare-run.ts"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^3.0.63",
@@ -50,6 +50,7 @@
     "eslint-config-next": "16.2.1",
     "pdfkit": "^0.18.0",
     "tailwindcss": "^4",
+    "tsx": "^4.21.0",
     "typescript": "^5",
     "vitest": "^4.1.0"
   }
