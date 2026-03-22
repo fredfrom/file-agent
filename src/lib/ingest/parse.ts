@@ -1,7 +1,14 @@
 import path from 'node:path';
+import { join } from 'node:path';
 import { PDFParse } from 'pdf-parse';
 import ExcelJS from 'exceljs';
 import { ACCEPTED_EXTENSIONS, type AcceptedExtension } from './constants';
+
+// Point pdfjs-dist worker to the actual file in node_modules to avoid
+// Turbopack relative resolution issues with the default "./pdf.worker.mjs".
+PDFParse.setWorker(
+  join(process.cwd(), 'node_modules/pdfjs-dist/legacy/build/pdf.worker.mjs')
+);
 
 /**
  * Parse a PDF buffer to plain text using pdf-parse v2 PDFParse class.

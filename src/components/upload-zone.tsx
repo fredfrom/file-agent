@@ -9,7 +9,7 @@ import type { UploadFileResult, IngestResponse } from '@/lib/ingest/types';
 
 interface FileStatus {
   filename: string;
-  status: 'uploading' | 'success' | 'error';
+  status: 'staged' | 'uploading' | 'success' | 'error';
   error?: string;
 }
 
@@ -99,7 +99,7 @@ export function UploadZone() {
 
       const validStatuses: FileStatus[] = valid.map((f) => ({
         filename: f.name,
-        status: 'uploading' as const,
+        status: 'staged' as const,
       }));
 
       setFileStatuses([...rejectedStatuses, ...validStatuses]);
@@ -112,7 +112,7 @@ export function UploadZone() {
     if (stagedFiles.length === 0 || !selectedFolder) return;
     setFileStatuses((prev) =>
       prev.map((fs) =>
-        fs.status !== 'error' ? { ...fs, status: 'uploading' } : fs
+        fs.status === 'staged' ? { ...fs, status: 'uploading' } : fs
       )
     );
     uploadMutation.mutate(stagedFiles);
@@ -211,6 +211,9 @@ export function UploadZone() {
               key={`${fs.filename}-${i}`}
               className="flex items-center gap-2 rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm"
             >
+              {fs.status === 'staged' && (
+                <Upload size={14} className="text-[var(--muted)]" />
+              )}
               {fs.status === 'uploading' && (
                 <Loader2 size={14} className="animate-spin text-[var(--accent)]" />
               )}
@@ -221,6 +224,9 @@ export function UploadZone() {
                 <XCircle size={14} className="text-[var(--error)]" />
               )}
               <span className="flex-1 truncate">{fs.filename}</span>
+              {fs.status === 'staged' && (
+                <span className="text-xs text-[var(--muted)]">Bereit</span>
+              )}
               {fs.status === 'uploading' && (
                 <span className="text-xs text-[var(--muted)]">Wird hochgeladen...</span>
               )}
