@@ -3,6 +3,9 @@
 import { useChat } from '@ai-sdk/react';
 import { useState } from 'react';
 import { Send } from 'lucide-react';
+import { ToolTrace } from './tool-trace';
+import { CitationText } from './citation-text';
+import { ExampleQuestions } from './example-questions';
 
 export function Chat() {
   const [input, setInput] = useState('');
@@ -22,6 +25,10 @@ export function Chat() {
 
       {/* Message area */}
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
+        {messages.length === 0 && (
+          <ExampleQuestions onSelect={(q) => sendMessage({ text: q })} />
+        )}
+
         {messages.map((message) => (
           <div
             key={message.id}
@@ -31,19 +38,30 @@ export function Chat() {
               {message.role === 'user' ? 'Sie' : 'Bauakte Agent'}
             </span>
             <div
-              className={`inline-block max-w-[80%] rounded-lg px-4 py-2 ${
+              className={`rounded-lg px-4 py-2 ${
                 message.role === 'user'
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-gray-100 dark:bg-gray-800'
+                  ? 'inline-block max-w-[80%] bg-blue-600 text-white'
+                  : 'w-full bg-gray-100 dark:bg-gray-800'
               }`}
             >
-              {message.parts
-                .filter((part) => part.type === 'text')
-                .map((part, i) => (
-                  <p key={i} className="whitespace-pre-wrap">
-                    {part.text}
-                  </p>
-                ))}
+              {message.parts.map((part, i) => {
+                if (part.type === 'text') {
+                  return <CitationText key={i} text={part.text} />;
+                }
+                if (part.type === 'tool-bash') {
+                  const toolInput = part.input as { command: string };
+                  const toolOutput = part.output as string | undefined;
+                  return (
+                    <ToolTrace
+                      key={i}
+                      command={toolInput.command}
+                      output={part.state === 'output-available' ? toolOutput : undefined}
+                      isRunning={part.state === 'input-available'}
+                    />
+                  );
+                }
+                return null;
+              })}
             </div>
           </div>
         ))}
