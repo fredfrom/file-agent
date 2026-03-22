@@ -17,7 +17,6 @@
 
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
-import { PDFParse } from 'pdf-parse';
 import ExcelJS from 'exceljs';
 import type { ProjectFilesystem } from './types';
 import { files as textFiles } from './filesystem';
@@ -28,18 +27,21 @@ const DOCS_DIR = path.resolve(process.cwd(), 'src/corpus/documents');
  * Map of virtual filesystem paths to disk file paths and the .txt key they replace.
  * PDF and Excel files replace their .txt counterparts; the old .txt key is removed.
  */
-const REAL_FILES: Record<string, { diskPath: string; replaces: string }> = {
+const REAL_FILES: Record<string, { diskPath: string; replaces: string; format: 'text' | 'excel' }> = {
   '/01_vertraege/auftraggeber/hauptvertrag_stadtpark_ag.pdf': {
-    diskPath: '01_vertraege/hauptvertrag_stadtpark_ag.pdf',
+    diskPath: '01_vertraege/hauptvertrag_stadtpark_ag.txt',
     replaces: '/01_vertraege/auftraggeber/hauptvertrag_stadtpark_ag.txt',
+    format: 'text',
   },
   '/01_vertraege/nachunternehmer/vertrag_rohbau_mueller_bau.pdf': {
-    diskPath: '01_vertraege/vertrag_rohbau_mueller_bau.pdf',
+    diskPath: '01_vertraege/vertrag_rohbau_mueller_bau.txt',
     replaces: '/01_vertraege/nachunternehmer/vertrag_rohbau_mueller_bau.txt',
+    format: 'text',
   },
   '/08_rechnungen/geprueft/re_mueller_bau_abschlag_01.xlsx': {
     diskPath: '08_rechnungen/re_mueller_bau_abschlag_01.xlsx',
     replaces: '/08_rechnungen/geprueft/re_mueller_bau_abschlag_01.txt',
+    format: 'excel',
   },
 };
 
@@ -55,20 +57,6 @@ const SVG_FILES: Record<string, string> = {
   '/05_plaene/schnitte/laengsschnitt_a_a.svg':
     '05_plaene/schnitte/laengsschnitt_a_a.svg',
 };
-
-/**
- * Extract plain text from a PDF buffer using pdf-parse v2.
- * Always destroys the parser instance to prevent memory leaks.
- */
-async function parsePdf(buffer: Buffer): Promise<string> {
-  const parser = new PDFParse({ data: new Uint8Array(buffer) });
-  try {
-    const result = await parser.getText();
-    return result.text;
-  } finally {
-    await parser.destroy();
-  }
-}
 
 /**
  * Convert an Excel buffer to tab-separated text.
@@ -107,21 +95,18 @@ async function parseExcel(buffer: Buffer): Promise<string> {
 export async function loadCorpus(): Promise<ProjectFilesystem> {
   const corpus: ProjectFilesystem = { ...textFiles };
 
-  // Parse and replace real-format files (PDF, Excel)
-  for (const [virtualPath, { diskPath, replaces }] of Object.entries(
+  // Parse and replace real-format files (pre-parsed text, Excel)
+  for (const [virtualPath, { diskPath, replaces, format }] of Object.entries(
     REAL_FILES
   )) {
     const fullPath = path.resolve(DOCS_DIR, diskPath);
-    const buffer = await readFile(fullPath);
-    const ext = path.extname(diskPath).toLowerCase();
 
     let content: string;
-    if (ext === '.pdf') {
-      content = await parsePdf(buffer);
-    } else if (ext === '.xlsx') {
+    if (format === 'excel') {
+      const buffer = await readFile(fullPath);
       content = await parseExcel(buffer);
     } else {
-      content = buffer.toString('utf-8');
+      content = await readFile(fullPath, 'utf-8');
     }
 
     // Remove old .txt key and add new real-format key
