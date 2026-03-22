@@ -2,7 +2,8 @@
 
 import { useChat } from '@ai-sdk/react';
 import { useState, useRef, useEffect } from 'react';
-import { Send, FolderTree, Loader2 } from 'lucide-react';
+import Link from 'next/link';
+import { Send, FolderTree, Loader2, Upload } from 'lucide-react';
 import { ToolTrace } from './tool-trace';
 import { CitationText } from './citation-text';
 import { ExampleQuestions } from './example-questions';
@@ -32,11 +33,20 @@ export function Chat() {
             Ihr KI-Assistent fuer Projektdokumente
           </p>
         </div>
-        <div className="ml-auto flex items-center gap-2">
-          <span className={`inline-block w-2 h-2 rounded-full ${isStreaming ? 'bg-amber-400 animate-pulse' : 'bg-[var(--green)]'}`} />
-          <span className="text-xs text-[var(--muted)]">
-            {isStreaming ? 'Verarbeite...' : 'Bereit'}
-          </span>
+        <div className="ml-auto flex items-center gap-4">
+          <Link
+            href="/ingest"
+            className="inline-flex items-center gap-1.5 text-sm text-[var(--muted)] hover:text-[var(--foreground)] transition-colors"
+          >
+            <Upload size={14} />
+            Dokumente
+          </Link>
+          <div className="flex items-center gap-2">
+            <span className={`inline-block w-2 h-2 rounded-full ${isStreaming ? 'bg-amber-400 animate-pulse' : 'bg-[var(--green)]'}`} />
+            <span className="text-xs text-[var(--muted)]">
+              {isStreaming ? 'Verarbeite...' : 'Bereit'}
+            </span>
+          </div>
         </div>
       </header>
 
