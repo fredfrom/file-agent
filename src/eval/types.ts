@@ -4,6 +4,23 @@
  * and aggregated evaluation run results.
  */
 
+import type { ProjectFilesystem } from '@/corpus/types';
+
+/**
+ * Configuration for an agent variant used in A/B testing.
+ * Each config defines a system prompt builder and step limit.
+ */
+export type AgentConfig = {
+  /** Human-readable name for the config (e.g., 'baseline', 'concise') */
+  name: string;
+  /** Description of what this config tests */
+  description: string;
+  /** Function to build the system prompt from the project corpus */
+  buildSystemPrompt: (corpus: ProjectFilesystem) => string;
+  /** Maximum number of agent steps before timeout */
+  maxSteps: number;
+};
+
 /**
  * Document categories in the construction project filesystem.
  * Maps to the top-level folder structure (01_vertraege through 09_genehmigungen).

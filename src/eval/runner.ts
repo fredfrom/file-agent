@@ -16,11 +16,13 @@ import {
   extractCitations,
 } from '@/eval/scoring';
 import { judgeQuality } from '@/eval/judge';
-import type { QuestionResult, EvalRunResult } from '@/eval/types';
+import type { QuestionResult, EvalRunResult, AgentConfig } from '@/eval/types';
 
 export interface RunEvalOptions {
   /** Run only the first 5 questions for rapid iteration */
   quick?: boolean;
+  /** Optional agent config for A/B testing — when omitted, uses default behavior */
+  config?: AgentConfig;
 }
 
 /**
@@ -31,7 +33,10 @@ export async function runEval(
   options?: RunEvalOptions
 ): Promise<EvalRunResult> {
   const corpus = await loadCorpus();
-  const systemPrompt = buildSystemPrompt(corpus);
+  const config = options?.config;
+  const systemPrompt = config
+    ? config.buildSystemPrompt(corpus)
+    : buildSystemPrompt(corpus);
 
   const activeQuestions = options?.quick
     ? questions.slice(0, 5)
@@ -54,7 +59,7 @@ export async function runEval(
       system: systemPrompt,
       messages: [{ role: 'user', content: q.text }],
       tools: { bash: tools.bash },
-      stopWhen: stepCountIs(q.maxSteps),
+      stopWhen: stepCountIs(config ? config.maxSteps : q.maxSteps),
     });
     const durationMs = Date.now() - start;
 
