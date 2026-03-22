@@ -1,6 +1,6 @@
 'use client';
 
-import { Terminal } from 'lucide-react';
+import { Terminal, ChevronRight } from 'lucide-react';
 
 interface ToolTraceProps {
   command: string;
@@ -10,22 +10,27 @@ interface ToolTraceProps {
 
 export function ToolTrace({ command, output, isRunning }: ToolTraceProps) {
   return (
-    <div className="my-2 rounded-lg border border-gray-700 bg-gray-900 text-sm font-mono overflow-hidden">
+    <div className="my-1.5 rounded-xl border border-[var(--border)] bg-[#0c0c14] text-sm font-mono overflow-hidden shadow-sm">
       {/* Command line */}
-      <div className="px-3 py-2 bg-gray-800 border-b border-gray-700 flex items-center gap-2">
-        <Terminal size={14} className="text-gray-400 shrink-0" />
-        <span className="text-green-400 select-none">$</span>
-        <span className="text-gray-100">{command}</span>
+      <div className="px-3 py-2 bg-[#0f0f1a] border-b border-[var(--border)] flex items-center gap-2">
+        <Terminal size={13} className="text-[var(--muted)] shrink-0" />
+        <ChevronRight size={12} className="text-[var(--green)] shrink-0" />
+        <span className="text-[var(--green)] font-medium">{command}</span>
       </div>
       {/* Running state */}
       {isRunning && !output && (
-        <div className="px-3 py-2 text-gray-400 animate-pulse">
-          Ausfuehren...
+        <div className="px-3 py-2.5 flex items-center gap-2">
+          <span className="flex gap-1">
+            <span className="w-1 h-1 rounded-full bg-[var(--green)] animate-pulse" style={{ animationDelay: '0ms' }} />
+            <span className="w-1 h-1 rounded-full bg-[var(--green)] animate-pulse" style={{ animationDelay: '150ms' }} />
+            <span className="w-1 h-1 rounded-full bg-[var(--green)] animate-pulse" style={{ animationDelay: '300ms' }} />
+          </span>
+          <span className="text-[var(--muted)] text-xs">Ausfuehren...</span>
         </div>
       )}
       {/* Output */}
       {output && (
-        <pre className="px-3 py-2 text-gray-300 whitespace-pre-wrap overflow-x-auto max-h-48 overflow-y-auto">
+        <pre className="px-3 py-2.5 text-[13px] text-zinc-400 whitespace-pre-wrap overflow-x-auto max-h-52 overflow-y-auto leading-relaxed">
           {output}
         </pre>
       )}

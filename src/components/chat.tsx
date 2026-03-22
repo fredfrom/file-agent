@@ -1,8 +1,8 @@
 'use client';
 
 import { useChat } from '@ai-sdk/react';
-import { useState } from 'react';
-import { Send } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
+import { Send, FolderTree, Loader2 } from 'lucide-react';
 import { ToolTrace } from './tool-trace';
 import { CitationText } from './citation-text';
 import { ExampleQuestions } from './example-questions';
@@ -10,44 +10,79 @@ import { ExampleQuestions } from './example-questions';
 export function Chat() {
   const [input, setInput] = useState('');
   const { messages, sendMessage, status, error } = useChat();
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const isDisabled = status !== 'ready';
+  const isStreaming = status === 'streaming' || status === 'submitted';
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
 
   return (
-    <div className="flex flex-col h-screen max-w-3xl mx-auto">
+    <div className="flex flex-col h-screen max-w-4xl mx-auto w-full">
       {/* Header */}
-      <header className="p-4 border-b border-gray-200 dark:border-gray-700">
-        <h1 className="text-xl font-bold">Bauakte Agent</h1>
-        <p className="text-sm text-gray-500 dark:text-gray-400">
-          KI-gestuetzte Dokumentennavigation fuer Bauprojekte
-        </p>
+      <header className="px-6 py-4 border-b border-[var(--border)] flex items-center gap-3">
+        <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-[var(--accent-glow)] border border-[var(--accent)]/20">
+          <FolderTree size={18} className="text-[var(--accent)]" />
+        </div>
+        <div>
+          <h1 className="text-base font-semibold tracking-tight">Bauakte Agent</h1>
+          <p className="text-xs text-[var(--muted)]">
+            Dokumentennavigation via Bash
+          </p>
+        </div>
+        <div className="ml-auto flex items-center gap-2">
+          <span className={`inline-block w-2 h-2 rounded-full ${isStreaming ? 'bg-amber-400 animate-pulse' : 'bg-[var(--green)]'}`} />
+          <span className="text-xs text-[var(--muted)]">
+            {isStreaming ? 'Verarbeite...' : 'Bereit'}
+          </span>
+        </div>
       </header>
 
       {/* Message area */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div className="flex-1 overflow-y-auto px-6 py-6 space-y-6">
         {messages.length === 0 && (
-          <ExampleQuestions onSelect={(q) => sendMessage({ text: q })} />
+          <div className="flex flex-col items-center justify-center h-full gap-8 -mt-8">
+            <div className="text-center space-y-3">
+              <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-[var(--surface-2)] border border-[var(--border)] mx-auto">
+                <FolderTree size={28} className="text-[var(--accent)]" />
+              </div>
+              <h2 className="text-lg font-medium">Bauprojekt durchsuchen</h2>
+              <p className="text-sm text-[var(--muted)] max-w-md">
+                Stellen Sie eine Frage und der Agent navigiert die Projektdokumente
+                per Bash-Befehle.
+              </p>
+            </div>
+            <ExampleQuestions onSelect={(q) => sendMessage({ text: q })} />
+          </div>
         )}
 
         {messages.map((message) => (
           <div
             key={message.id}
-            className={message.role === 'user' ? 'text-right' : 'text-left'}
+            className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
           >
-            <span className="text-xs text-gray-500 dark:text-gray-400">
-              {message.role === 'user' ? 'Sie' : 'Bauakte Agent'}
-            </span>
             <div
-              className={`rounded-lg px-4 py-2 ${
+              className={`${
                 message.role === 'user'
-                  ? 'inline-block max-w-[80%] bg-blue-600 text-white'
-                  : 'w-full bg-gray-100 dark:bg-gray-800'
+                  ? 'max-w-[75%] bg-[var(--accent)] text-white rounded-2xl rounded-br-md px-4 py-2.5'
+                  : 'w-full space-y-2'
               }`}
             >
+              {message.role === 'assistant' && (
+                <span className="text-[10px] font-medium uppercase tracking-wider text-[var(--muted)]">
+                  Agent
+                </span>
+              )}
               {message.parts.map((part, i) => {
                 try {
                   if (part.type === 'text') {
-                    return <CitationText key={i} text={part.text} />;
+                    return (
+                      <div key={i} className={message.role === 'user' ? '' : 'bg-[var(--surface)] border border-[var(--border)] rounded-xl px-4 py-3'}>
+                        <CitationText text={part.text} />
+                      </div>
+                    );
                   }
                   if (part.type === 'tool-bash') {
                     const toolInput = part.input as { command?: string } | undefined;
@@ -78,48 +113,55 @@ export function Chat() {
 
         {/* Status indicator */}
         {status === 'submitted' && (
-          <p className="text-sm text-gray-500 dark:text-gray-400">
-            Denke nach...
-          </p>
+          <div className="flex items-center gap-2 text-[var(--muted)]">
+            <Loader2 size={14} className="animate-spin" />
+            <span className="text-sm">Agent denkt nach...</span>
+          </div>
         )}
+
+        <div ref={messagesEndRef} />
       </div>
 
       {/* Error display */}
       {error && (
-        <div className="px-4 py-2 text-red-600 dark:text-red-400">
-          Fehler: {error.message}
+        <div className="mx-6 mb-2 px-4 py-2.5 rounded-lg bg-red-500/10 border border-red-500/20 text-[var(--error)] text-sm">
+          {error.message}
         </div>
       )}
 
       {/* Input form */}
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          if (input.trim()) {
-            sendMessage({ text: input });
-            setInput('');
-          }
-        }}
-        className="p-4 border-t border-gray-200 dark:border-gray-700"
-      >
-        <div className="flex gap-2">
-          <input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            disabled={isDisabled}
-            placeholder="Stellen Sie eine Frage zum Bauprojekt..."
-            className="flex-1 rounded-lg border border-gray-300 dark:border-gray-600 px-4 py-2 bg-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <button
-            type="submit"
-            disabled={isDisabled || !input.trim()}
-            aria-label="Senden"
-            className="rounded-lg bg-blue-600 text-white px-3 py-2 disabled:opacity-50 hover:bg-blue-700 transition-colors"
-          >
-            <Send size={18} />
-          </button>
-        </div>
-      </form>
+      <div className="px-6 py-4 border-t border-[var(--border)]">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (input.trim()) {
+              sendMessage({ text: input });
+              setInput('');
+            }
+          }}
+        >
+          <div className="flex gap-3 items-center bg-[var(--surface)] border border-[var(--border)] rounded-xl px-4 py-1 focus-within:border-[var(--accent)]/50 focus-within:shadow-[0_0_0_3px_var(--accent-glow)] transition-all duration-200">
+            <input
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              disabled={isDisabled}
+              placeholder="Frage zum Bauprojekt stellen..."
+              className="flex-1 bg-transparent py-2.5 text-sm placeholder:text-[var(--muted)] focus:outline-none disabled:opacity-50"
+            />
+            <button
+              type="submit"
+              disabled={isDisabled || !input.trim()}
+              aria-label="Senden"
+              className="flex items-center justify-center w-8 h-8 rounded-lg bg-[var(--accent)] text-white disabled:opacity-30 hover:bg-[var(--accent-hover)] transition-colors duration-150 cursor-pointer disabled:cursor-not-allowed shrink-0"
+            >
+              <Send size={15} />
+            </button>
+          </div>
+          <p className="text-[10px] text-[var(--muted)] mt-2 text-center">
+            Der Agent navigiert Dokumente per ls, cat, grep, find
+          </p>
+        </form>
+      </div>
     </div>
   );
 }

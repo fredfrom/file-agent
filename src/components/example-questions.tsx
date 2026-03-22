@@ -1,5 +1,7 @@
 'use client';
 
+import { MessageSquare } from 'lucide-react';
+
 const EXAMPLE_QUESTIONS = [
   'Welche Nachtraege gibt es und was ist deren aktueller Status?',
   'Was wurde in der letzten Baubesprechung besprochen?',
@@ -14,17 +16,23 @@ interface ExampleQuestionsProps {
 
 export function ExampleQuestions({ onSelect }: ExampleQuestionsProps) {
   return (
-    <div className="space-y-2">
-      <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">
-        Beispielfragen:
+    <div className="w-full max-w-lg space-y-2">
+      <p className="text-xs font-medium uppercase tracking-wider text-[var(--muted)] mb-3">
+        Beispielfragen
       </p>
       {EXAMPLE_QUESTIONS.map((question, i) => (
         <button
           key={i}
           onClick={() => onSelect(question)}
-          className="block w-full text-left px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-sm"
+          className="group flex items-start gap-3 w-full text-left px-4 py-3 rounded-xl border border-[var(--border)] bg-[var(--surface)] hover:bg-[var(--surface-2)] hover:border-[var(--border-hover)] transition-all duration-150 cursor-pointer"
         >
-          {question}
+          <MessageSquare
+            size={14}
+            className="text-[var(--muted)] group-hover:text-[var(--accent)] transition-colors mt-0.5 shrink-0"
+          />
+          <span className="text-sm text-[var(--foreground)] leading-snug">
+            {question}
+          </span>
         </button>
       ))}
     </div>
