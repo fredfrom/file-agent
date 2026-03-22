@@ -1,13 +1,14 @@
 import { streamText, stepCountIs, convertToModelMessages, type UIMessage } from 'ai';
 import { anthropic } from '@ai-sdk/anthropic';
 import { createBashTool } from 'bash-tool';
-import { loadCorpus } from '@/corpus/loader';
+import { createDbFilesystem } from '@/lib/filesystem/db-filesystem';
 import { buildSystemPrompt } from '@/lib/agent/system-prompt';
 
 export const maxDuration = 60;
 
 const MAX_MESSAGE_LENGTH = 2000;
 const MAX_MESSAGES = 20;
+const PROJECT_ID = '00000000-0000-0000-0000-000000000001';
 
 export async function POST(req: Request) {
   const { messages }: { messages: UIMessage[] } = await req.json();
@@ -25,9 +26,10 @@ export async function POST(req: Request) {
     return new Response('Message too long', { status: 400 });
   }
 
-  const corpus = await loadCorpus();
+  // DB-backed lazy filesystem (replaces loadCorpus -- D-07 hard cutover)
+  const { bash, paths, accessLogger } = await createDbFilesystem(PROJECT_ID);
   const { tools } = await createBashTool({
-    files: corpus,
+    sandbox: bash,
     destination: '/',
   });
 
@@ -35,11 +37,14 @@ export async function POST(req: Request) {
 
   const result = streamText({
     model: anthropic(process.env.AGENT_MODEL || 'claude-haiku-4-5-20251001'),
-    system: buildSystemPrompt(corpus),
+    system: buildSystemPrompt(paths),
     messages: modelMessages,
     tools: { bash: tools.bash },
     stopWhen: stepCountIs(5),
   });
+
+  // Flush access logs after streaming completes (fire-and-forget)
+  result.then(() => accessLogger.flush().catch(console.error));
 
   return result.toUIMessageStreamResponse();
 }
