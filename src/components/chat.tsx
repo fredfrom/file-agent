@@ -45,22 +45,32 @@ export function Chat() {
               }`}
             >
               {message.parts.map((part, i) => {
-                if (part.type === 'text') {
-                  return <CitationText key={i} text={part.text} />;
+                try {
+                  if (part.type === 'text') {
+                    return <CitationText key={i} text={part.text} />;
+                  }
+                  if (part.type === 'tool-bash') {
+                    const toolInput = part.input as { command?: string } | undefined;
+                    const command = toolInput?.command ?? '';
+                    if (!command) return null;
+                    let output: string | undefined;
+                    if (part.state === 'output-available' && part.output) {
+                      const out = part.output as { stdout?: string } | string;
+                      output = typeof out === 'string' ? out : out?.stdout ?? '';
+                    }
+                    return (
+                      <ToolTrace
+                        key={i}
+                        command={command}
+                        output={output}
+                        isRunning={part.state === 'input-available' || part.state === 'input-streaming'}
+                      />
+                    );
+                  }
+                  return null;
+                } catch {
+                  return null;
                 }
-                if (part.type === 'tool-bash') {
-                  const toolInput = part.input as { command: string };
-                  const toolOutput = part.output as string | undefined;
-                  return (
-                    <ToolTrace
-                      key={i}
-                      command={toolInput.command}
-                      output={part.state === 'output-available' ? toolOutput : undefined}
-                      isRunning={part.state === 'input-available'}
-                    />
-                  );
-                }
-                return null;
               })}
             </div>
           </div>
