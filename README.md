@@ -87,6 +87,8 @@ The live demo uses [Coolify](https://coolify.io/) on a self-hosted VPS. This avo
 3. Set `ANTHROPIC_API_KEY` as an environment variable
 4. Deploy — Coolify auto-detects Next.js and handles build/start
 
+> **Note:** The live demo runs on HTTP via a free sslip.io domain. For HTTPS, point a custom domain to the VPS and Coolify will auto-provision a Let's Encrypt certificate.
+
 ### Option B: Vercel
 
 The codebase is standard Next.js and deploys to Vercel with zero code changes. Connect the GitHub repo in the [Vercel Dashboard](https://vercel.com/new), or deploy via CLI:
