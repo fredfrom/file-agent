@@ -78,23 +78,31 @@ npm run build
 npm test
 ```
 
-### Deploy to Vercel
+### Option A: Self-hosted with Coolify (recommended)
 
-Connect the GitHub repo in the [Vercel Dashboard](https://vercel.com/new), or deploy via CLI:
+The live demo uses [Coolify](https://coolify.io/) on a self-hosted VPS. This avoids serverless function timeouts — the agent runs multi-step bash navigation loops that can take 15-30 seconds, which exceeds Vercel's Hobby plan limits.
+
+1. Install Coolify on any VPS (1 vCPU, 2 GB RAM is sufficient)
+2. Add the GitHub repo as a new resource (Nixpacks build pack)
+3. Set `ANTHROPIC_API_KEY` as an environment variable
+4. Deploy — Coolify auto-detects Next.js and handles build/start
+
+### Option B: Vercel
+
+The codebase is standard Next.js and deploys to Vercel with zero code changes. Connect the GitHub repo in the [Vercel Dashboard](https://vercel.com/new), or deploy via CLI:
 
 ```bash
 npx vercel deploy --prod
 ```
 
-### Environment Variables
-
 Set `ANTHROPIC_API_KEY` in Vercel Dashboard > Project Settings > Environment Variables.
+
+**Note:** Vercel Pro plan (60s function timeout) is recommended. The Hobby plan's 10-second timeout may cut off multi-step agent responses.
 
 ### Runtime Notes
 
 - **Edge runtime is not supported** — `just-bash` uses Node.js APIs internally. The default Node.js serverless runtime is required.
-- **Timeout:** Hobby plan has a 10-second function timeout. Multi-step agent loops (8-10 steps) may exceed this. Pro plan (60s timeout) is recommended.
-- **Streaming** keeps the connection alive — Vercel supports streamed responses natively.
+- **Streaming** keeps the connection alive — both Vercel and Coolify support streamed responses natively.
 
 ## Project Structure
 
