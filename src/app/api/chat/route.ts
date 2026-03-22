@@ -4,6 +4,8 @@ import { createBashTool } from 'bash-tool';
 import { loadCorpus } from '@/corpus/loader';
 import { buildSystemPrompt } from '@/lib/agent/system-prompt';
 
+export const maxDuration = 60;
+
 export async function POST(req: Request) {
   const { messages }: { messages: UIMessage[] } = await req.json();
 
@@ -16,11 +18,11 @@ export async function POST(req: Request) {
   const modelMessages = await convertToModelMessages(messages);
 
   const result = streamText({
-    model: anthropic('claude-sonnet-4-20250514'),
+    model: anthropic(process.env.AGENT_MODEL || 'claude-haiku-4-5-20251001'),
     system: buildSystemPrompt(corpus),
     messages: modelMessages,
     tools: { bash: tools.bash },
-    stopWhen: stepCountIs(10),
+    stopWhen: stepCountIs(5),
   });
 
   return result.toUIMessageStreamResponse();
