@@ -67,4 +67,25 @@ describe('buildSystemPrompt', () => {
     expect(result).toContain('cat');
     expect(result).toContain('grep');
   });
+
+  it('contains format awareness section with Dateiformate heading', () => {
+    expect(result).toContain('Dateiformate');
+  });
+
+  it('mentions that .pdf files are searchable as text', () => {
+    expect(result).toContain('.pdf');
+  });
+
+  it('mentions that .xlsx files contain TSV format', () => {
+    expect(result).toContain('.xlsx');
+    expect(result).toContain('TSV');
+  });
+
+  it('contains synthesis strategy section', () => {
+    expect(result).toContain('uebergreifende Fragen');
+  });
+
+  it('synthesis strategy mentions grep -rl', () => {
+    expect(result).toContain('grep -rl');
+  });
 });
