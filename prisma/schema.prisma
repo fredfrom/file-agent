@@ -36,3 +36,18 @@ model Document {
   @@index([folder])
   @@map("documents")
 }
+
+model AccessLog {
+  id          String   @id @default(uuid()) @db.Uuid
+  projectId   String   @map("project_id") @db.Uuid
+  virtualPath String   @map("virtual_path")
+  source      String   @db.VarChar(10)
+  accessOrder Int      @map("access_order")
+  sessionId   String   @map("session_id") @db.Uuid
+  accessedAt  DateTime @map("accessed_at") @default(now())
+
+  @@index([projectId])
+  @@index([sessionId])
+  @@index([accessedAt])
+  @@map("access_logs")
+}
