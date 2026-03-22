@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  serverExternalPackages: ["@mongodb-js/zstd"],
+  serverExternalPackages: ["just-bash", "bash-tool", "@mongodb-js/zstd"],
 };
 
 export default nextConfig;
