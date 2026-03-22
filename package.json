@@ -9,7 +9,8 @@
     "lint": "eslint",
     "test": "vitest run",
     "test:watch": "vitest",
-    "eval": "npx tsx src/eval/run.ts"
+    "eval": "npx tsx src/eval/run.ts",
+    "eval:compare": "npx tsx src/eval/compare-run.ts"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^3.0.63",
