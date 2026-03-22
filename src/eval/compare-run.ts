@@ -9,6 +9,7 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { compareConfigs } from '@/eval/compare';
 import { baseline, concise } from '@/eval/configs';
+import { generateProtocol, protocolFilename } from '@/eval/protocol';
 
 const quick = process.argv.includes('--quick');
 
@@ -48,6 +49,15 @@ async function main() {
   const filename = `${dir}/compare-${result.configA.name}-vs-${result.configB.name}-${dateStr}.json`;
   writeFileSync(filename, JSON.stringify(result, null, 2));
   console.log(`Comparison saved to ${filename}\n`);
+
+  // Generate protocol Markdown artifact
+  const protocolDir = 'eval-results/protocols';
+  mkdirSync(protocolDir, { recursive: true });
+
+  const protocol = generateProtocol(baseline, concise, result);
+  const protocolFile = `${protocolDir}/${protocolFilename(baseline, concise, dateStr)}`;
+  writeFileSync(protocolFile, protocol);
+  console.log(`Protocol saved to ${protocolFile}\n`);
 }
 
 main().catch((err) => {
