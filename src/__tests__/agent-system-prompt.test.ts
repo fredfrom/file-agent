@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import {
   buildSystemPrompt,
   generateDirectoryTree,
+  generateDirectoryTreeFromPaths,
 } from '@/lib/agent/system-prompt';
 import type { ProjectFilesystem } from '@/corpus/types';
 
@@ -87,5 +88,33 @@ describe('buildSystemPrompt', () => {
 
   it('synthesis strategy mentions grep -rl', () => {
     expect(result).toContain('grep -rl');
+  });
+});
+
+describe('generateDirectoryTreeFromPaths', () => {
+  it('produces same output as generateDirectoryTree for same paths', () => {
+    const files: Record<string, string> = {
+      '/a/b/file.txt': 'content',
+      '/a/c/other.txt': 'content2',
+    };
+    const paths = Object.keys(files);
+    const treeFromFiles = generateDirectoryTree(files);
+    const treeFromPaths = generateDirectoryTreeFromPaths(paths);
+    expect(treeFromPaths).toBe(treeFromFiles);
+  });
+
+  it('builds intermediate directories', () => {
+    const tree = generateDirectoryTreeFromPaths(['/01_vertraege/auftraggeber/hauptvertrag.pdf']);
+    expect(tree).toContain('/01_vertraege');
+    expect(tree).toContain('/01_vertraege/auftraggeber');
+    expect(tree).toContain('/01_vertraege/auftraggeber/hauptvertrag.pdf');
+  });
+});
+
+describe('buildSystemPrompt with string[] input', () => {
+  it('accepts string[] paths and returns prompt with tree', () => {
+    const prompt = buildSystemPrompt(['/01_vertraege/auftraggeber/hauptvertrag.pdf']);
+    expect(prompt).toContain('/01_vertraege');
+    expect(prompt).toContain('Bauprojekt');
   });
 });
