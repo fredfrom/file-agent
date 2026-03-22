@@ -7,11 +7,19 @@ import { Send, FolderTree, Loader2, Upload } from 'lucide-react';
 import { ToolTrace } from './tool-trace';
 import { CitationText } from './citation-text';
 import { ExampleQuestions } from './example-questions';
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
+import { DocumentViewer } from './document-viewer';
+import type { CitationInfo } from '@/lib/viewer/types';
 
 export function Chat() {
   const [input, setInput] = useState('');
   const { messages, sendMessage, status, error } = useChat();
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [viewer, setViewer] = useState<CitationInfo | null>(null);
+
+  const handleCitationClick = (path: string, passage?: string) => {
+    setViewer({ path, passage });
+  };
 
   const isDisabled = status !== 'ready';
   const isStreaming = status === 'streaming' || status === 'submitted';
@@ -85,7 +93,7 @@ export function Chat() {
                   if (part.type === 'text') {
                     return (
                       <div key={i} className={message.role === 'user' ? '' : 'bg-[var(--surface)] border border-[var(--border)] rounded-xl px-4 py-3'}>
-                        <CitationText text={part.text} />
+                        <CitationText text={part.text} onCitationClick={message.role === 'user' ? undefined : handleCitationClick} />
                       </div>
                     );
                   }
@@ -167,6 +175,22 @@ export function Chat() {
           </p>
         </form>
       </div>
+
+      <Sheet open={!!viewer} onOpenChange={(open) => { if (!open) setViewer(null); }}>
+        <SheetContent
+          side="right"
+          className="w-full sm:w-[60vw] sm:max-w-[900px] bg-[var(--surface)] border-l border-[var(--border)] p-0 overflow-y-auto"
+        >
+          <SheetHeader className="px-4 pt-4">
+            <SheetTitle className="text-base font-semibold text-[var(--foreground)]">
+              Dokumentansicht
+            </SheetTitle>
+          </SheetHeader>
+          {viewer && (
+            <DocumentViewer path={viewer.path} passage={viewer.passage} />
+          )}
+        </SheetContent>
+      </Sheet>
     </div>
   );
 }
