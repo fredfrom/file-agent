@@ -1,7 +1,20 @@
 {
   "name": "file-agent",
   "version": "0.1.0",
-  "private": true,
+  "description": "AI agent that navigates construction project documents via bash commands against a virtual filesystem",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/USER/file-agent.git"
+  },
+  "keywords": [
+    "ai-agent",
+    "construction",
+    "filesystem",
+    "bash",
+    "nextjs",
+    "vercel-ai-sdk",
+    "german"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
