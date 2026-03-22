@@ -22,11 +22,33 @@ export function generateDirectoryTree(files: ProjectFilesystem): string {
 }
 
 /**
+ * Generate a sorted directory tree listing from a list of virtual paths.
+ * No content loading required -- paths only.
+ */
+export function generateDirectoryTreeFromPaths(paths: string[]): string {
+  const entries = new Set<string>();
+  for (const p of [...paths].sort()) {
+    const parts = p.split('/').filter(Boolean);
+    for (let i = 1; i < parts.length; i++) {
+      entries.add('/' + parts.slice(0, i).join('/'));
+    }
+    entries.add(p);
+  }
+  return [...entries].sort().join('\n');
+}
+
+/**
  * Build the German-language system prompt for the construction project agent.
  * Includes filesystem tree, navigation rules, and project context.
+ *
+ * Accepts either a ProjectFilesystem (Record<string, string>) for backward
+ * compatibility with the eval runner, or a string[] of paths for the
+ * DB-backed lazy filesystem (no content loading needed for tree generation).
  */
-export function buildSystemPrompt(corpus: ProjectFilesystem): string {
-  const tree = generateDirectoryTree(corpus);
+export function buildSystemPrompt(input: ProjectFilesystem | string[]): string {
+  const tree = Array.isArray(input)
+    ? generateDirectoryTreeFromPaths(input)
+    : generateDirectoryTree(input);
 
   return `Du bist ein KI-Assistent fuer Bauprojekte. Du navigierst eine virtuelle Dateiablage eines deutschen Bauprojekts ("Sanierung Hochhaus am Stadtpark") mit Bash-Befehlen.
 
