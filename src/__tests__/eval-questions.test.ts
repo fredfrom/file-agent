@@ -3,8 +3,8 @@ import { questions } from '@/eval/questions';
 import type { DocumentCategory } from '@/eval/types';
 
 describe('eval questions', () => {
-  it('has exactly 18 questions', () => {
-    expect(questions).toHaveLength(18);
+  it('has at least 18 questions', () => {
+    expect(questions.length).toBeGreaterThanOrEqual(18);
   });
 
   it('all question IDs are unique', () => {

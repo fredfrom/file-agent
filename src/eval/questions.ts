@@ -318,4 +318,48 @@ export const questions: EvalQuestion[] = [
     ],
     maxSteps: 10,
   },
+  // ── math/logic (3) ──────────────────────────────────────────────────
+  {
+    id: 'Q-19',
+    text: 'Wie hoch ist die Gesamtsumme aller genehmigten Nachtraege in Euro?',
+    category: 'nachtraege',
+    expectedKeywords: [
+      '73.000',
+      '45.000',
+      '28.000',
+    ],
+    expectedSourcePaths: [
+      '/02_nachtraege/genehmigt/nachtrag_001_tiefgarage_abdichtung.txt',
+      '/02_nachtraege/genehmigt/nachtrag_002_fassade_daemmung.txt',
+    ],
+    maxSteps: 8,
+  },
+  {
+    id: 'Q-20',
+    text: 'Wie viele Maengel sind noch offen und wie viele wurden bereits behoben? Nenne die Anzahl jeweils.',
+    category: 'maengel',
+    expectedKeywords: [
+      'offen',
+      'behoben',
+    ],
+    expectedSourcePaths: [
+      '/04_maengel/offen/mangel_001_riss_tiefgarage.txt',
+    ],
+    maxSteps: 6,
+  },
+  {
+    id: 'Q-21',
+    text: 'Welcher Nachtrag hat die hoechste Summe und um wie viel Euro uebersteigt er den zweithoechsten Nachtrag?',
+    category: 'cross-cutting',
+    expectedKeywords: [
+      'NT-001',
+      '45.000',
+      '17.000',
+    ],
+    expectedSourcePaths: [
+      '/02_nachtraege/genehmigt/nachtrag_001_tiefgarage_abdichtung.txt',
+      '/02_nachtraege/genehmigt/nachtrag_002_fassade_daemmung.txt',
+    ],
+    maxSteps: 8,
+  },
 ];

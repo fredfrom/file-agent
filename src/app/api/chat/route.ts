@@ -6,8 +6,24 @@ import { buildSystemPrompt } from '@/lib/agent/system-prompt';
 
 export const maxDuration = 60;
 
+const MAX_MESSAGE_LENGTH = 2000;
+const MAX_MESSAGES = 20;
+
 export async function POST(req: Request) {
   const { messages }: { messages: UIMessage[] } = await req.json();
+
+  // Input validation
+  if (!Array.isArray(messages) || messages.length === 0) {
+    return new Response('Invalid request', { status: 400 });
+  }
+  if (messages.length > MAX_MESSAGES) {
+    return new Response('Too many messages', { status: 400 });
+  }
+  const lastMessage = messages[messages.length - 1];
+  const lastText = lastMessage?.parts?.find((p: { type: string }) => p.type === 'text') as { text?: string } | undefined;
+  if (lastText?.text && lastText.text.length > MAX_MESSAGE_LENGTH) {
+    return new Response('Message too long', { status: 400 });
+  }
 
   const corpus = await loadCorpus();
   const { tools } = await createBashTool({
