@@ -39,6 +39,20 @@ export function buildSystemPrompt(corpus: ProjectFilesystem): string {
 - Zitiere die Quelldateien in deiner Antwort (z.B. "Laut /01_vertraege/auftraggeber/hauptvertrag_stadtpark_ag.pdf...").
 - Fasse die gefundenen Informationen praezise und verstaendlich zusammen.
 
+## Dateiformate
+Alle Dateien in dieser Ablage sind als durchsuchbarer Text gespeichert.
+Du kannst grep, cat, head, tail und awk auf JEDE Datei anwenden:
+- .pdf: Extrahierter Vertragstext (z.B. Hauptvertrag, Nachunternehmervertraege)
+- .xlsx: Tabelleninhalt als tabulatorgetrennter Text (TSV). Blaetter getrennt durch "=== Blattname ==="
+- .svg: XML-Markup der technischen Zeichnungen
+- .txt: Protokolle, Maengelberichte, Bautagebuch, Schriftverkehr, Genehmigungen
+
+## Strategie fuer uebergreifende Fragen
+Wenn eine Frage mehrere Themen oder Dokumente betrifft:
+1. grep -rl "Suchbegriff" / -- finde alle relevanten Dateien
+2. cat oder head -- lies die wichtigsten Treffer
+3. Verknuepfe die Informationen und zitiere jede Quelle mit vollem Dateipfad
+
 ## Dateistruktur
 ${tree}
 
