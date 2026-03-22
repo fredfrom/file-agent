@@ -1,5 +1,6 @@
 import { prisma } from "./client";
 import type { Document } from "@/generated/prisma/client";
+import type { DocumentListItem } from "@/lib/ingest/types";
 
 export interface SearchResult {
   id: string;
@@ -115,4 +116,72 @@ export async function getAllVirtualPaths(
     orderBy: { virtualPath: "asc" },
   });
   return results.map((r) => r.virtualPath);
+}
+
+/**
+ * List all documents for a project with character count (for ingestion UI).
+ * Computes charCount from content.length to avoid storing redundant data.
+ */
+export async function getDocumentsWithCharCount(
+  projectId: string
+): Promise<DocumentListItem[]> {
+  const results = await prisma.document.findMany({
+    where: { projectId },
+    select: {
+      id: true,
+      virtualPath: true,
+      folder: true,
+      filename: true,
+      extension: true,
+      content: true,
+      createdAt: true,
+    },
+    orderBy: { virtualPath: "asc" },
+  });
+  return results.map((r) => ({
+    id: r.id,
+    virtualPath: r.virtualPath,
+    folder: r.folder,
+    filename: r.filename,
+    extension: r.extension,
+    charCount: r.content.length,
+    createdAt: r.createdAt.toISOString(),
+  }));
+}
+
+/**
+ * Insert or update a document (upsert by projectId + virtualPath).
+ * Handles re-uploads gracefully by updating content on conflict.
+ */
+export async function insertDocument(params: {
+  projectId: string;
+  virtualPath: string;
+  folder: string;
+  filename: string;
+  extension: string;
+  content: string;
+}): Promise<Document> {
+  const { projectId, virtualPath, folder, filename, extension, content } = params;
+  return prisma.document.upsert({
+    where: {
+      projectId_virtualPath: { projectId, virtualPath },
+    },
+    update: { content, folder, filename, extension },
+    create: {
+      projectId,
+      virtualPath,
+      folder,
+      filename,
+      extension,
+      content,
+      metadata: {},
+    },
+  });
+}
+
+/**
+ * Delete a document by its ID.
+ */
+export async function deleteDocument(id: string): Promise<void> {
+  await prisma.document.delete({ where: { id } });
 }
