@@ -3,33 +3,74 @@
 import ReactMarkdown from 'react-markdown';
 import { FileText } from 'lucide-react';
 
-const CITATION_REGEX = /(\/\d{2}_[\w-]+(?:\/[\w.-]+)*)/g;
+// Matches: [/path/to/file.pdf | "passage text"] or bare /path/to/file.pdf
+const CITATION_REGEX = /\[(\/\d{2}_[\w-]+(?:\/[\w.-]+)*)\s*\|\s*"([^"]*)"\]|(\/\d{2}_[\w-]+(?:\/[\w.-]+)*)/g;
 
 interface CitationTextProps {
   text: string;
+  onCitationClick?: (path: string, passage?: string) => void;
 }
 
-function renderWithCitations(text: string) {
-  const parts = text.split(CITATION_REGEX);
+function renderWithCitations(
+  text: string,
+  onCitationClick?: (path: string, passage?: string) => void,
+) {
+  const segments: React.ReactNode[] = [];
+  const regex = new RegExp(CITATION_REGEX.source, 'g');
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+  let key = 0;
 
-  return parts.map((segment, i) => {
-    if (CITATION_REGEX.test(segment)) {
-      CITATION_REGEX.lastIndex = 0;
-      return (
+  while ((match = regex.exec(text)) !== null) {
+    // Text before this match
+    if (match.index > lastIndex) {
+      segments.push(<span key={key++}>{text.slice(lastIndex, match.index)}</span>);
+    }
+
+    const path = match[1] || match[3];
+    const passage = match[2] || undefined;
+
+    if (onCitationClick) {
+      segments.push(
+        <button
+          key={key++}
+          type="button"
+          onClick={() => onCitationClick(path, passage)}
+          className="inline-flex items-center gap-1 bg-[var(--citation-bg)] text-[var(--citation-text)] px-2 py-1 rounded-md text-xs font-mono border border-blue-500/10 hover:bg-blue-500/25 hover:border-blue-500/30 cursor-pointer transition-colors"
+        >
+          <FileText size={10} className="shrink-0 opacity-60" />
+          {path}
+        </button>,
+      );
+    } else {
+      segments.push(
         <span
-          key={i}
+          key={key++}
           className="inline-flex items-center gap-1 bg-[var(--citation-bg)] text-[var(--citation-text)] px-1.5 py-0.5 rounded-md text-xs font-mono border border-blue-500/10"
         >
           <FileText size={10} className="shrink-0 opacity-60" />
-          {segment}
-        </span>
+          {path}
+        </span>,
       );
     }
-    return <span key={i}>{segment}</span>;
-  });
+
+    lastIndex = match.index + match[0].length;
+  }
+
+  // Remaining text after last match
+  if (lastIndex < text.length) {
+    segments.push(<span key={key++}>{text.slice(lastIndex)}</span>);
+  }
+
+  // If no matches, return original text
+  if (segments.length === 0) {
+    return <span>{text}</span>;
+  }
+
+  return segments;
 }
 
-export function CitationText({ text }: CitationTextProps) {
+export function CitationText({ text, onCitationClick }: CitationTextProps) {
   return (
     <div className="prose prose-invert prose-sm max-w-none leading-relaxed [&>*:first-child]:mt-0 [&>*:last-child]:mb-0">
       <ReactMarkdown
@@ -37,7 +78,7 @@ export function CitationText({ text }: CitationTextProps) {
           p: ({ children }) => (
             <p className="mb-2 last:mb-0 text-[var(--foreground)]">
               {typeof children === 'string'
-                ? renderWithCitations(children)
+                ? renderWithCitations(children, onCitationClick)
                 : children}
             </p>
           ),
@@ -59,7 +100,7 @@ export function CitationText({ text }: CitationTextProps) {
           li: ({ children }) => (
             <li className="text-sm text-[var(--foreground)]">
               {typeof children === 'string'
-                ? renderWithCitations(children)
+                ? renderWithCitations(children, onCitationClick)
                 : children}
             </li>
           ),
