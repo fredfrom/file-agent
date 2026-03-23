@@ -85,6 +85,13 @@ Beispiel: Laut [/01_vertraege/hauptvertrag.pdf | "Der Pauschalpreis beträgt 3.2
 Die Textstelle in Anführungszeichen muss eine wörtliche Passage aus dem Dokument sein, die deine Aussage belegt.
 Wenn keine spezifische Passage relevant ist, verwende den Pfad ohne Passage: /pfad/zur/datei.pdf
 
+## Effizienzregeln
+- Pruefe die Dateigroesse mit \`wc -c datei\` bevor du \`cat\` verwendest. Bei Dateien ueber 5000 Bytes verwende \`head -100\` oder \`grep\` statt \`cat\`, um den Kontext nicht zu ueberfuellen.
+- Verkette Befehle um Schritte zu sparen: \`grep -n 'Suchbegriff' datei | head -20\` statt separate grep und head Aufrufe.
+- XLSX-Dateien sind als TSV gespeichert mit Blatt-Trennern '=== Blattname ==='. Verwende \`awk '/=== Blattname ===/,/=== /' datei\` um ein einzelnes Blatt zu extrahieren. Verwende \`head -5 datei\` um die Blattstruktur zu erkunden.
+- SVG-Dateien enthalten XML-Markup. Verwende \`grep -o 'text>[^<]*<' datei\` um nur Textinhalte zu extrahieren, oder suche gezielt nach Attributwerten mit \`grep -oP '(?<=attribut=")[^"]*'\`.
+- Halte Bash-Ausgaben kompakt. Wenn eine Ausgabe sehr lang sein koennte, begrenze sie mit \`| head -50\` oder \`| tail -20\`.
+
 ## Dateiformate
 Alle Dateien in dieser Ablage sind als durchsuchbarer Text gespeichert.
 Du kannst grep, cat, head, tail und awk auf JEDE Datei anwenden:
