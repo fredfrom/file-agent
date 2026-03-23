@@ -3,16 +3,17 @@
 import { useChat } from '@ai-sdk/react';
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
-import { Send, Loader2, Upload, X, BarChart3, Building2 } from 'lucide-react';
+import { Send, Loader2, Upload, X, BarChart3, Building2, Trash2 } from 'lucide-react';
 import { ToolTrace } from './tool-trace';
 import { CitationText } from './citation-text';
 import { ExampleQuestions } from './example-questions';
 import { DocumentViewer } from './document-viewer';
+import { ThemeToggle } from './theme-toggle';
 import type { CitationInfo } from '@/lib/viewer/types';
 
 export function Chat() {
   const [input, setInput] = useState('');
-  const { messages, sendMessage, status, error } = useChat();
+  const { messages, sendMessage, status, error, setMessages } = useChat({ id: 'bauakte' });
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [viewer, setViewer] = useState<CitationInfo | null>(null);
 
@@ -63,6 +64,17 @@ export function Chat() {
                 {isStreaming ? 'Verarbeite…' : 'Bereit'}
               </span>
             </div>
+            {messages.length > 0 && (
+              <button
+                type="button"
+                onClick={() => setMessages([])}
+                aria-label="Chat leeren"
+                className="flex items-center justify-center w-8 h-8 rounded-lg text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--surface-2)] transition-colors"
+              >
+                <Trash2 size={15} />
+              </button>
+            )}
+            <ThemeToggle />
           </div>
         </header>
 
