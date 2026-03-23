@@ -2,7 +2,7 @@
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Plus, MessageSquare, Trash2 } from 'lucide-react';
-import { formatDate } from '@/lib/viewer/format';
+import { formatDateTime } from '@/lib/viewer/format';
 
 interface ConversationEntry {
   id: string;
@@ -72,7 +72,7 @@ export function ConversationSidebar({ activeId, onSelect, onNew }: ConversationS
                   <MessageSquare size={13} className="shrink-0 text-[var(--muted)]" />
                   <div className="min-w-0 flex-1">
                     <p className="text-sm truncate">{conv.title}</p>
-                    <p className="text-[10px] text-[var(--muted)]">{formatDate(conv.updatedAt)}</p>
+                    <p className="text-[10px] text-[var(--muted)]">{formatDateTime(conv.updatedAt)}</p>
                   </div>
                 </button>
                 <button

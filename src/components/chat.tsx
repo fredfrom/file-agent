@@ -4,7 +4,8 @@ import { useChat, type UIMessage } from '@ai-sdk/react';
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import Link from 'next/link';
-import { Send, Loader2, Upload, X, BarChart3, Building2 } from 'lucide-react';
+import { Send, Loader2, Upload, X, BarChart3, Building2, Copy, Check, RefreshCw } from 'lucide-react';
+import { formatTime } from '@/lib/viewer/format';
 import { ToolTrace } from './tool-trace';
 import { CitationText } from './citation-text';
 import { ExampleQuestions } from './example-questions';
@@ -12,6 +13,24 @@ import { DocumentViewer } from './document-viewer';
 import { ThemeToggle } from './theme-toggle';
 import { ConversationSidebar } from './conversation-sidebar';
 import type { CitationInfo } from '@/lib/viewer/types';
+
+function CopyButton({ text, light }: { text: string; light?: boolean }) {
+  const [copied, setCopied] = useState(false);
+  return (
+    <button
+      type="button"
+      onClick={() => {
+        navigator.clipboard.writeText(text);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 1500);
+      }}
+      aria-label="Kopieren"
+      className={`opacity-0 group-hover:opacity-100 transition-opacity p-0.5 rounded ${light ? 'text-white/50 hover:text-white/80' : 'text-[var(--muted)] hover:text-[var(--foreground)]'}`}
+    >
+      {copied ? <Check size={12} /> : <Copy size={12} />}
+    </button>
+  );
+}
 
 // Normalize DB-stored parts back to UIMessage parts format.
 // User messages are stored as UIMessage parts directly.
@@ -46,12 +65,10 @@ export function Chat() {
   const conversationIdRef = useRef<string | null>(null);
   const queryClient = useQueryClient();
 
-  // Keep ref in sync so useChat body always reads the latest value
   conversationIdRef.current = conversationId;
 
-  const { messages, sendMessage, status, error, setMessages } = useChat({
+  const { messages, sendMessage, regenerate, status, error, setMessages } = useChat({
     id: conversationId ?? 'new',
-    get body() { return { conversationId: conversationIdRef.current }; },
   });
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -116,7 +133,7 @@ export function Chat() {
       setConversationId(activeId);
       queryClient.invalidateQueries({ queryKey: ['conversations'] });
     }
-    sendMessage({ text });
+    sendMessage({ text }, { body: { conversationId: activeId } });
   }, [sendMessage, queryClient]);
 
   return (
@@ -184,53 +201,84 @@ export function Chat() {
             </div>
           )}
 
-          {messages.map((message) => (
-            <div
-              key={message.id}
-              className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
-            >
+          {messages.map((message) => {
+            // Collect all text from this message for copy
+            const fullText = message.parts
+              .filter((p): p is { type: 'text'; text: string } => p.type === 'text')
+              .map((p) => p.text)
+              .join('\n');
+            const timestamp = (message as unknown as { createdAt?: string }).createdAt;
+
+            return (
               <div
-                className={`${
-                  message.role === 'user'
-                    ? 'max-w-[75%] bg-[var(--accent)] text-white rounded-2xl rounded-br-md px-4 py-2.5'
-                    : 'w-full space-y-2'
-                }`}
+                key={message.id}
+                className={`group flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
-                {message.parts.map((part, i) => {
-                  try {
-                    if (part.type === 'text') {
-                      return (
-                        <div key={i} className={message.role === 'user' ? '' : 'bg-[var(--surface)] border border-[var(--border)] rounded-xl px-4 py-3'}>
-                          <CitationText text={part.text} onCitationClick={message.role === 'user' ? undefined : handleCitationClick} />
-                        </div>
-                      );
-                    }
-                    if (part.type === 'tool-bash') {
-                      const toolInput = part.input as { command?: string } | undefined;
-                      const command = toolInput?.command ?? '';
-                      if (!command) return null;
-                      let output: string | undefined;
-                      if (part.state === 'output-available' && part.output) {
-                        const out = part.output as { stdout?: string } | string;
-                        output = typeof out === 'string' ? out : out?.stdout ?? '';
+                <div
+                  className={`${
+                    message.role === 'user'
+                      ? 'max-w-[75%] bg-[var(--accent)] text-white rounded-2xl rounded-br-md px-4 py-2.5'
+                      : 'w-full space-y-2'
+                  }`}
+                >
+                  {message.parts.map((part, i) => {
+                    try {
+                      if (part.type === 'text') {
+                        return (
+                          <div key={i} className={message.role === 'user' ? '' : 'bg-[var(--surface)] border border-[var(--border)] rounded-xl px-4 py-3'}>
+                            <CitationText text={part.text} onCitationClick={message.role === 'user' ? undefined : handleCitationClick} />
+                          </div>
+                        );
                       }
-                      return (
-                        <ToolTrace
-                          key={i}
-                          command={command}
-                          output={output}
-                          isRunning={part.state === 'input-available' || part.state === 'input-streaming'}
-                        />
-                      );
+                      if (part.type === 'tool-bash') {
+                        const toolInput = part.input as { command?: string } | undefined;
+                        const command = toolInput?.command ?? '';
+                        if (!command) return null;
+                        let output: string | undefined;
+                        if (part.state === 'output-available' && part.output) {
+                          const out = part.output as { stdout?: string } | string;
+                          output = typeof out === 'string' ? out : out?.stdout ?? '';
+                        }
+                        return (
+                          <ToolTrace
+                            key={i}
+                            command={command}
+                            output={output}
+                            isRunning={part.state === 'input-available' || part.state === 'input-streaming'}
+                          />
+                        );
+                      }
+                      return null;
+                    } catch {
+                      return null;
                     }
-                    return null;
-                  } catch {
-                    return null;
-                  }
-                })}
+                  })}
+
+                  {/* Timestamp + copy + regenerate */}
+                  <div className={`flex items-center gap-2 mt-1 ${message.role === 'user' ? 'justify-end' : ''}`}>
+                    {timestamp && (
+                      <span className={`text-[10px] ${message.role === 'user' ? 'text-white/50' : 'text-[var(--muted)]'}`}>
+                        {formatTime(timestamp)}
+                      </span>
+                    )}
+                    {fullText && (
+                      <CopyButton text={fullText} light={message.role === 'user'} />
+                    )}
+                    {message.role === 'assistant' && !isStreaming && (
+                      <button
+                        type="button"
+                        onClick={() => regenerate({ body: { conversationId: conversationIdRef.current } })}
+                        aria-label="Antwort neu generieren"
+                        className="opacity-0 group-hover:opacity-100 transition-opacity p-0.5 rounded text-[var(--muted)] hover:text-[var(--foreground)]"
+                      >
+                        <RefreshCw size={12} />
+                      </button>
+                    )}
+                  </div>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
 
           {/* Status indicator */}
           {isStreaming && (

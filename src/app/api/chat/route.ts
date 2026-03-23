@@ -12,7 +12,9 @@ const MAX_MESSAGES = 20;
 const PROJECT_ID = '00000000-0000-0000-0000-000000000001';
 
 export async function POST(req: Request) {
-  const { messages, conversationId }: { messages: UIMessage[]; conversationId?: string } = await req.json();
+  const body = await req.json();
+  const messages: UIMessage[] = body.messages;
+  const conversationId: string | undefined = body.conversationId;
 
   // Input validation
   if (!Array.isArray(messages) || messages.length === 0) {
