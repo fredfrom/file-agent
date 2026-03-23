@@ -264,12 +264,12 @@ export function Chat() {
                     {fullText && (
                       <CopyButton text={fullText} light={message.role === 'user'} />
                     )}
-                    {message.role === 'assistant' && !isStreaming && (
+                    {message.role === 'user' && !isStreaming && (
                       <button
                         type="button"
                         onClick={() => regenerate({ body: { conversationId: conversationIdRef.current } })}
-                        aria-label="Antwort neu generieren"
-                        className="opacity-0 group-hover:opacity-100 transition-opacity p-0.5 rounded text-[var(--muted)] hover:text-[var(--foreground)]"
+                        aria-label="Erneut senden"
+                        className="opacity-0 group-hover:opacity-100 transition-opacity p-0.5 rounded text-white/50 hover:text-white/80"
                       >
                         <RefreshCw size={12} />
                       </button>
