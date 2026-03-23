@@ -40,7 +40,8 @@ function normalizePartsForUI(role: string, parts: unknown[]): unknown[] {
   if (role === 'user') return parts;
 
   // Assistant content from onFinish is an array of { type: 'text', text } | { type: 'tool-call', ... }
-  // Convert to UIMessage parts format
+  // Tool role content is an array of { type: 'tool-result', toolCallId, toolName, result }
+  // Convert both to UIMessage parts format
   return parts.map((p: unknown) => {
     const part = p as Record<string, unknown>;
     if (part.type === 'text') {
@@ -51,9 +52,18 @@ function normalizePartsForUI(role: string, parts: unknown[]): unknown[] {
         type: `tool-${part.toolName as string}`,
         toolInvocationId: part.toolCallId,
         toolName: part.toolName,
-        state: 'output-available',
-        input: part.args,
-        output: part.result ?? null,
+        state: 'partial-call',
+        args: part.args,
+      };
+    }
+    if (part.type === 'tool-result') {
+      return {
+        type: `tool-${part.toolName as string}`,
+        toolInvocationId: part.toolCallId,
+        toolName: part.toolName,
+        state: 'result',
+        args: {},
+        result: part.result ?? null,
       };
     }
     return part;
@@ -129,11 +139,36 @@ export function Chat() {
         if (res.ok) {
           const data = await res.json();
           const msgs = Array.isArray(data?.messages) ? data.messages : [];
-          const loaded: UIMessage[] = msgs.map((m: { id: string; role: string; parts: unknown[] }) => ({
-            id: m.id,
-            role: m.role as 'user' | 'assistant',
-            parts: normalizePartsForUI(m.role, m.parts),
-          }));
+          // Merge tool-role messages into preceding assistant message
+          const loaded: UIMessage[] = [];
+          for (const m of msgs as { id: string; role: string; parts: unknown[] }[]) {
+            if (m.role === 'tool') {
+              // Append tool-result parts to the last assistant message
+              const last = loaded[loaded.length - 1];
+              if (last && last.role === 'assistant') {
+                const toolParts = normalizePartsForUI('tool', m.parts);
+                // Merge tool results into matching tool-call parts
+                for (const tp of toolParts) {
+                  const tpart = tp as Record<string, unknown>;
+                  const existing = last.parts.find(
+                    (p) => (p as Record<string, unknown>).toolInvocationId === tpart.toolInvocationId
+                  );
+                  if (existing) {
+                    // Update the partial-call to result state
+                    Object.assign(existing, { state: 'result', result: tpart.result });
+                  } else {
+                    last.parts.push(tp as UIMessage['parts'][number]);
+                  }
+                }
+              }
+            } else {
+              loaded.push({
+                id: m.id,
+                role: m.role as 'user' | 'assistant',
+                parts: normalizePartsForUI(m.role, m.parts) as UIMessage['parts'],
+              });
+            }
+          }
           setMessages(loaded);
         }
       } catch (err) {

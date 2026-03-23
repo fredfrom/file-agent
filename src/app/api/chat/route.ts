@@ -69,14 +69,14 @@ export async function POST(req: Request) {
       tools: { bash: tools.bash },
       stopWhen: stepCountIs(15),
       async onFinish({ response }) {
-        // Save assistant messages to DB
+        // Save all response messages (assistant + tool) to DB
         if (conversationId) {
           for (const msg of response.messages) {
-            if (msg.role === 'assistant') {
+            if (msg.role === 'assistant' || msg.role === 'tool') {
               await prisma.message.create({
                 data: {
                   conversationId,
-                  role: 'assistant',
+                  role: msg.role,
                   parts: JSON.parse(JSON.stringify(msg.content)),
                 },
               });
