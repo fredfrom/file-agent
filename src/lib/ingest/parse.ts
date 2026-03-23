@@ -1,19 +1,22 @@
 import path from 'node:path';
 import { join } from 'node:path';
-import { PDFParse } from 'pdf-parse';
 import ExcelJS from 'exceljs';
 import { ACCEPTED_EXTENSIONS, type AcceptedExtension } from './constants';
 
-// Point pdfjs-dist worker to the actual file in node_modules to avoid
-// Turbopack relative resolution issues with the default "./pdf.worker.mjs".
-PDFParse.setWorker(
-  join(process.cwd(), 'node_modules/pdfjs-dist/legacy/build/pdf.worker.mjs')
-);
+let pdfParseInitialized = false;
 
 /**
  * Parse a PDF buffer to plain text using pdf-parse v2 PDFParse class.
+ * Lazily imports pdf-parse to avoid DOMMatrix errors at build time.
  */
 export async function parsePdf(buffer: Buffer): Promise<string> {
+  const { PDFParse } = await import('pdf-parse');
+  if (!pdfParseInitialized) {
+    PDFParse.setWorker(
+      join(process.cwd(), 'node_modules/pdfjs-dist/legacy/build/pdf.worker.mjs')
+    );
+    pdfParseInitialized = true;
+  }
   const parser = new PDFParse({ data: buffer });
   const result = await parser.getText();
   await parser.destroy();
