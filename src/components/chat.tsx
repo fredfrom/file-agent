@@ -3,7 +3,7 @@
 import { useChat } from '@ai-sdk/react';
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
-import { Send, FolderTree, Loader2, Upload, X } from 'lucide-react';
+import { Send, Loader2, Upload, X, BarChart3, Building2 } from 'lucide-react';
 import { ToolTrace } from './tool-trace';
 import { CitationText } from './citation-text';
 import { ExampleQuestions } from './example-questions';
@@ -34,7 +34,7 @@ export function Chat() {
         {/* Header */}
         <header className="px-6 py-4 border-b border-[var(--border)] flex items-center gap-3">
           <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-[var(--accent-glow)] border border-[var(--accent)]/20">
-            <FolderTree size={18} className="text-[var(--accent)]" />
+            <Building2 size={18} className="text-[var(--accent)]" />
           </div>
           <div>
             <h1 className="text-base font-semibold tracking-tight">Bauakte Agent</h1>
@@ -43,6 +43,13 @@ export function Chat() {
             </p>
           </div>
           <div className="ml-auto flex items-center gap-4">
+            <Link
+              href="/dashboard"
+              className="inline-flex items-center gap-1.5 text-sm text-[var(--muted)] hover:text-[var(--foreground)] transition-colors"
+            >
+              <BarChart3 size={14} />
+              Übersicht
+            </Link>
             <Link
               href="/ingest"
               className="inline-flex items-center gap-1.5 text-sm text-[var(--muted)] hover:text-[var(--foreground)] transition-colors"
@@ -65,7 +72,7 @@ export function Chat() {
             <div className="flex flex-col items-center justify-center h-full gap-8 -mt-8">
               <div className="text-center space-y-3">
                 <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-[var(--surface-2)] border border-[var(--border)] mx-auto">
-                  <FolderTree size={28} className="text-[var(--accent)]" />
+                  <Building2 size={28} className="text-[var(--accent)]" />
                 </div>
                 <h2 className="text-lg font-medium">Fragen Sie zur Bauakte</h2>
                 <p className="text-sm text-[var(--muted)] max-w-md">
@@ -126,10 +133,12 @@ export function Chat() {
           ))}
 
           {/* Status indicator */}
-          {status === 'submitted' && (
-            <div className="flex items-center gap-2 text-[var(--muted)]">
-              <Loader2 size={14} className="animate-spin" />
-              <span className="text-sm">Agent denkt nach…</span>
+          {isStreaming && (
+            <div className="flex items-center gap-2 text-[var(--muted)] py-1">
+              <Loader2 size={14} className="animate-spin text-[var(--accent)]" />
+              <span className="text-sm">
+                {status === 'submitted' ? 'Agent denkt nach…' : 'Agent arbeitet…'}
+              </span>
             </div>
           )}
 

@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowLeft, FolderTree } from 'lucide-react';
+import { ArrowLeft, Building2 } from 'lucide-react';
 import { UploadZone } from '@/components/upload-zone';
 import { DocumentTable } from '@/components/document-table';
 
@@ -21,7 +21,7 @@ export default function IngestPage() {
 
       <div className="flex items-center gap-3 mb-8">
         <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-[var(--accent-glow)] border border-[var(--accent)]/20">
-          <FolderTree size={18} className="text-[var(--accent)]" />
+          <Building2 size={18} className="text-[var(--accent)]" />
         </div>
         <h1 className="text-xl font-semibold tracking-tight">Dokumente verwalten</h1>
       </div>

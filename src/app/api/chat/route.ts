@@ -40,7 +40,7 @@ export async function POST(req: Request) {
     system: buildSystemPrompt(paths),
     messages: modelMessages,
     tools: { bash: tools.bash },
-    stopWhen: stepCountIs(5),
+    stopWhen: stepCountIs(15),
   });
 
   return result.toUIMessageStreamResponse();
