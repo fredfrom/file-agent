@@ -1,7 +1,7 @@
 'use client';
 
-import { useChat } from '@ai-sdk/react';
-import { useState, useRef, useEffect } from 'react';
+import { useChat, type UIMessage } from '@ai-sdk/react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { Send, Loader2, Upload, X, BarChart3, Building2, Trash2 } from 'lucide-react';
 import { ToolTrace } from './tool-trace';
@@ -11,9 +11,33 @@ import { DocumentViewer } from './document-viewer';
 import { ThemeToggle } from './theme-toggle';
 import type { CitationInfo } from '@/lib/viewer/types';
 
+const STORAGE_KEY = 'bauakte-chat-history';
+
+function loadHistory(): UIMessage[] {
+  if (typeof window === 'undefined') return [];
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveHistory(messages: UIMessage[]) {
+  try {
+    // Only persist text + tool-result parts, skip streaming state
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+  } catch {
+    // Storage full or unavailable — silently ignore
+  }
+}
+
 export function Chat() {
   const [input, setInput] = useState('');
-  const { messages, sendMessage, status, error, setMessages } = useChat({ id: 'bauakte' });
+  const { messages, sendMessage, status, error, setMessages } = useChat({
+    id: 'bauakte',
+    initialMessages: loadHistory(),
+  });
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [viewer, setViewer] = useState<CitationInfo | null>(null);
 
@@ -23,6 +47,13 @@ export function Chat() {
 
   const isDisabled = status !== 'ready';
   const isStreaming = status === 'streaming' || status === 'submitted';
+
+  // Persist messages to localStorage when not streaming
+  useEffect(() => {
+    if (status === 'ready' && messages.length > 0) {
+      saveHistory(messages);
+    }
+  }, [messages, status]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -67,7 +98,7 @@ export function Chat() {
             {messages.length > 0 && (
               <button
                 type="button"
-                onClick={() => setMessages([])}
+                onClick={() => { setMessages([]); localStorage.removeItem(STORAGE_KEY); }}
                 aria-label="Chat leeren"
                 className="flex items-center justify-center w-8 h-8 rounded-lg text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--surface-2)] transition-colors"
               >
