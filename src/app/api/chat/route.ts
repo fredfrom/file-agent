@@ -43,8 +43,5 @@ export async function POST(req: Request) {
     stopWhen: stepCountIs(5),
   });
 
-  // Flush access logs after streaming completes (fire-and-forget)
-  result.then(() => accessLogger.flush().catch(console.error));
-
   return result.toUIMessageStreamResponse();
 }
