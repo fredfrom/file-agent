@@ -13,14 +13,45 @@ import { ThemeToggle } from './theme-toggle';
 import { ConversationSidebar } from './conversation-sidebar';
 import type { CitationInfo } from '@/lib/viewer/types';
 
+// Normalize DB-stored parts back to UIMessage parts format.
+// User messages are stored as UIMessage parts directly.
+// Assistant messages are stored as AI SDK internal content format from onFinish.
+function normalizePartsForUI(role: string, parts: unknown[]): unknown[] {
+  if (role === 'user') return parts;
+
+  // Assistant content from onFinish is an array of { type: 'text', text } | { type: 'tool-call', ... }
+  // Convert to UIMessage parts format
+  return parts.map((p: unknown) => {
+    const part = p as Record<string, unknown>;
+    if (part.type === 'text') {
+      return { type: 'text', text: part.text as string };
+    }
+    if (part.type === 'tool-call') {
+      return {
+        type: `tool-${part.toolName as string}`,
+        toolInvocationId: part.toolCallId,
+        toolName: part.toolName,
+        state: 'output-available',
+        input: part.args,
+        output: part.result ?? null,
+      };
+    }
+    return part;
+  });
+}
+
 export function Chat() {
   const [input, setInput] = useState('');
   const [conversationId, setConversationId] = useState<string | null>(null);
+  const conversationIdRef = useRef<string | null>(null);
   const queryClient = useQueryClient();
+
+  // Keep ref in sync so useChat body always reads the latest value
+  conversationIdRef.current = conversationId;
 
   const { messages, sendMessage, status, error, setMessages } = useChat({
     id: conversationId ?? 'new',
-    body: { conversationId },
+    get body() { return { conversationId: conversationIdRef.current }; },
   });
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -45,22 +76,26 @@ export function Chat() {
   }, [messages]);
 
   const handleNewConversation = useCallback(() => {
+    conversationIdRef.current = null;
     setConversationId(null);
     setMessages([]);
     setViewer(null);
   }, [setMessages]);
 
   const handleSelectConversation = useCallback(async (id: string) => {
+    conversationIdRef.current = id;
     setConversationId(id);
     setViewer(null);
     // Load messages from DB
     const res = await fetch(`/api/conversations/${id}`);
     if (res.ok) {
       const data = await res.json();
+      // DB stores assistant content as AI SDK internal format (content array),
+      // but user messages are stored as UIMessage parts. Normalize both.
       const loaded: UIMessage[] = data.messages.map((m: { id: string; role: string; parts: unknown[] }) => ({
         id: m.id,
-        role: m.role,
-        parts: m.parts,
+        role: m.role as 'user' | 'assistant',
+        parts: normalizePartsForUI(m.role, m.parts),
       }));
       setMessages(loaded);
     }
@@ -68,7 +103,7 @@ export function Chat() {
 
   const handleSend = useCallback(async (text: string) => {
     // If no active conversation, create one first
-    let activeId = conversationId;
+    let activeId = conversationIdRef.current;
     if (!activeId) {
       const res = await fetch('/api/conversations', {
         method: 'POST',
@@ -77,11 +112,12 @@ export function Chat() {
       });
       const conv = await res.json();
       activeId = conv.id;
+      conversationIdRef.current = activeId;
       setConversationId(activeId);
       queryClient.invalidateQueries({ queryKey: ['conversations'] });
     }
     sendMessage({ text });
-  }, [conversationId, sendMessage, queryClient]);
+  }, [sendMessage, queryClient]);
 
   return (
     <div className="flex h-screen w-full">
