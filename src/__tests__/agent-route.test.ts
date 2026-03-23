@@ -17,8 +17,12 @@ describe('route handler structure (AGNT-03, AGNT-04)', () => {
     expect(routeSource).toContain('streamText');
   });
 
-  it('sets step limit via stepCountIs (AGNT-04)', () => {
-    expect(routeSource).toContain('stepCountIs(');
+  it('defines MAX_STEPS constant', () => {
+    expect(routeSource).toContain('const MAX_STEPS = ');
+  });
+
+  it('sets step limit via stepCountIs(MAX_STEPS) (AGNT-04)', () => {
+    expect(routeSource).toContain('stepCountIs(MAX_STEPS)');
   });
 
   it('uses destination / for absolute paths', () => {

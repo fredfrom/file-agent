@@ -104,6 +104,30 @@ describe('buildSystemPrompt', () => {
     expect(result).toContain('## Regeln');
     expect(result).toContain('## Dateiformate');
   });
+
+  it('contains Effizienzregeln section heading', () => {
+    expect(result).toContain('## Effizienzregeln');
+  });
+
+  it('contains wc -c instruction for file size checking', () => {
+    expect(result).toContain('wc -c');
+  });
+
+  it('contains awk instruction for XLSX sheet filtering', () => {
+    expect(result).toContain("awk '/=== Blattname ===/");
+  });
+
+  it('contains SVG text extraction guidance with grep -o', () => {
+    expect(result).toContain("grep -o 'text>[^<]*<'");
+  });
+
+  it('mentions head for output limiting', () => {
+    expect(result).toContain('| head -50');
+  });
+
+  it('contains step limit self-reporting instruction', () => {
+    expect(result).toContain('maximale Anzahl an Suchschritten');
+  });
 });
 
 describe('generateDirectoryTreeFromPaths', () => {

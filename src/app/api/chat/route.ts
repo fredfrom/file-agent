@@ -8,6 +8,7 @@ import { PROJECT_ID } from '@/lib/ingest/constants';
 
 export const maxDuration = 60;
 
+const MAX_STEPS = 15;
 const MAX_MESSAGE_LENGTH = 2000;
 const MAX_MESSAGES = 20;
 
@@ -67,9 +68,21 @@ export async function POST(req: Request) {
       system: buildSystemPrompt(paths),
       messages: modelMessages,
       tools: { bash: tools.bash },
-      stopWhen: stepCountIs(15),
+      stopWhen: stepCountIs(MAX_STEPS),
       async onFinish({ response }) {
         try {
+          // Detect step exhaustion: count tool-result messages
+          const toolMessageCount = response.messages.filter(
+            (m) => m.role === 'tool',
+          ).length;
+          if (toolMessageCount >= MAX_STEPS) {
+            console.warn(
+              '[api/chat] Agent hit step limit of',
+              MAX_STEPS,
+              '— answer may be incomplete',
+            );
+          }
+
           // Save all response messages (assistant + tool) to DB
           if (conversationId) {
             for (const msg of response.messages) {
