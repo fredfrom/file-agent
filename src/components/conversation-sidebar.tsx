@@ -22,7 +22,12 @@ export function ConversationSidebar({ activeId, onSelect, onNew, onClose }: Conv
 
   const { data: conversations = [], isLoading } = useQuery<ConversationEntry[]>({
     queryKey: ['conversations'],
-    queryFn: () => fetch('/api/conversations').then((r) => r.json()),
+    queryFn: async () => {
+      const r = await fetch('/api/conversations');
+      if (!r.ok) throw new Error('Fehler beim Laden der Unterhaltungen');
+      const data = await r.json();
+      return Array.isArray(data) ? data : [];
+    },
   });
 
   const deleteMutation = useMutation({

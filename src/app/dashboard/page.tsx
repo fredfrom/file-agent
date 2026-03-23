@@ -45,7 +45,11 @@ function extensionIcon(ext: string) {
 export default function DashboardPage() {
   const { data, isLoading } = useQuery<Stats>({
     queryKey: ['stats'],
-    queryFn: () => fetch('/api/stats').then((r) => r.json()),
+    queryFn: async () => {
+      const r = await fetch('/api/stats');
+      if (!r.ok) throw new Error('Fehler beim Laden der Statistiken');
+      return r.json();
+    },
   });
 
   const [expandedFolders, setExpandedFolders] = useState<Set<string>>(new Set());

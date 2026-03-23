@@ -15,10 +15,12 @@ export function DocumentTable() {
 
   const { data, isLoading, error } = useQuery({
     queryKey: ['documents'],
-    queryFn: () =>
-      fetch('/api/ingest')
-        .then((r) => r.json())
-        .then((d) => d.documents as DocumentListItem[]),
+    queryFn: async () => {
+      const r = await fetch('/api/ingest');
+      if (!r.ok) throw new Error('Fehler beim Laden der Dokumente');
+      const d = await r.json();
+      return (d.documents ?? []) as DocumentListItem[];
+    },
   });
 
   const deleteMutation = useMutation({
