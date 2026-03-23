@@ -4,6 +4,10 @@ An AI agent that navigates construction project documents like a filesystem — 
 
 > **Note:** The application UI, all documents, and agent responses are in German, targeting German-speaking construction professionals. This README is in English.
 
+## Live Demo
+
+**[Try it here](http://omiaiqfe92sz4nrhgkep518j.152.53.230.125.sslip.io/)** -- No SSL (self-hosted on a VPS without a custom domain).
+
 ## Architectural Thesis
 
 For document collections with natural hierarchy (like construction projects), filesystem navigation produces more auditable results than embedding-based retrieval.

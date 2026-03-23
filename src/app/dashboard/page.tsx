@@ -1,9 +1,9 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, FileText, Folder, FolderOpen, Clock, BarChart3, ChevronRight, ChevronDown, X } from 'lucide-react';
+import { ArrowLeft, FileText, Folder, FolderOpen, Clock, BarChart3, ChevronRight, ChevronDown, X, FileX } from 'lucide-react';
 import { formatDate } from '@/lib/viewer/format';
 import { DocumentViewer } from '@/components/document-viewer';
 import { ThemeToggle } from '@/components/theme-toggle';
@@ -51,6 +51,16 @@ export default function DashboardPage() {
   const [expandedFolders, setExpandedFolders] = useState<Set<string>>(new Set());
   const [viewerPath, setViewerPath] = useState<string | null>(null);
 
+  // Escape key closes document viewer
+  useEffect(() => {
+    if (!viewerPath) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setViewerPath(null);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [viewerPath]);
+
   const toggleFolder = (name: string) => {
     setExpandedFolders((prev) => {
       const next = new Set(prev);
@@ -62,26 +72,43 @@ export default function DashboardPage() {
 
   return (
     <div className="flex h-screen w-full">
-      <div className={`flex flex-col h-full transition-all duration-300 ${viewerPath ? 'w-[40%] min-w-[360px]' : 'w-full max-w-4xl mx-auto'} overflow-y-auto`}>
-        <div className="px-6 py-6">
+      <div className={`flex flex-col h-full transition-all duration-300 ${viewerPath ? 'hidden md:flex md:w-[40%] md:min-w-[360px]' : 'w-full max-w-4xl mx-auto'} overflow-y-auto`}>
+        <div className="px-4 md:px-6 py-6">
           <div className="flex items-center justify-between mb-8">
             <Link
               href="/"
               className="inline-flex items-center gap-1.5 text-sm text-[var(--muted)] hover:text-[var(--foreground)] transition-colors"
             >
               <ArrowLeft size={16} />
-              Zurück zum Chat
+              Zurueck zum Chat
             </Link>
             <ThemeToggle />
           </div>
 
-          <h1 className="text-xl font-semibold mb-6">Projektübersicht</h1>
+          <h1 className="text-xl font-semibold mb-6">Projektuebersicht</h1>
 
           {isLoading ? (
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
               {[...Array(4)].map((_, i) => (
                 <div key={i} className="h-24 rounded-xl bg-[var(--surface)] animate-pulse" />
               ))}
+            </div>
+          ) : data && data.totalDocuments === 0 ? (
+            /* Empty state when no documents uploaded */
+            <div className="flex flex-col items-center justify-center py-20 gap-4">
+              <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-[var(--surface-2)] border border-[var(--border)]">
+                <FileX size={32} className="text-[var(--muted)]" />
+              </div>
+              <h2 className="text-lg font-medium text-[var(--foreground)]">Noch keine Dokumente hochgeladen</h2>
+              <p className="text-sm text-[var(--muted)] max-w-md text-center">
+                Laden Sie Projektdokumente ueber den Bereich &quot;Dokumente&quot; hoch, um die Uebersicht zu fuellen.
+              </p>
+              <Link
+                href="/ingest"
+                className="mt-2 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--accent)] text-white text-sm hover:bg-[var(--accent-hover)] transition-colors"
+              >
+                Dokumente hochladen
+              </Link>
             </div>
           ) : data ? (
             <>
@@ -114,14 +141,14 @@ export default function DashboardPage() {
                 <div className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4">
                   <div className="flex items-center gap-2 text-[var(--muted)] mb-2">
                     <Clock size={14} />
-                    <span className="text-xs">Zuletzt hinzugefügt</span>
+                    <span className="text-xs">Zuletzt hinzugefuegt</span>
                   </div>
                   {data.latestDocument ? (
                     <p className="text-sm font-medium truncate" title={data.latestDocument.filename}>
                       {data.latestDocument.filename}
                     </p>
                   ) : (
-                    <p className="text-sm text-[var(--muted)]">–</p>
+                    <p className="text-sm text-[var(--muted)]">--</p>
                   )}
                   {data.latestDocument && (
                     <p className="text-xs text-[var(--muted)] mt-0.5">
@@ -213,15 +240,15 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* Document viewer panel */}
+      {/* Document viewer panel -- full-screen on mobile */}
       {viewerPath && (
-        <div className="flex flex-col h-full w-[60%] border-l border-[var(--border)] bg-[var(--background)]">
+        <div className="fixed inset-0 z-20 md:relative md:z-auto flex flex-col h-full w-full md:w-[60%] border-l border-[var(--border)] bg-[var(--background)]">
           <div className="flex items-center justify-between px-4 py-3 border-b border-[var(--border)]">
             <h2 className="text-sm font-semibold text-[var(--foreground)]">Dokumentansicht</h2>
             <button
               type="button"
               onClick={() => setViewerPath(null)}
-              aria-label="Dokumentansicht schließen"
+              aria-label="Dokumentansicht schliessen"
               className="flex items-center justify-center w-7 h-7 rounded-md text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--surface-2)] transition-colors"
             >
               <X size={16} />

@@ -1,34 +1,43 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/db/client';
-
-const PROJECT_ID = '00000000-0000-0000-0000-000000000001';
+import { PROJECT_ID } from '@/lib/ingest/constants';
 
 // List all conversations (newest first)
 export async function GET() {
-  const conversations = await prisma.conversation.findMany({
-    where: { projectId: PROJECT_ID },
-    orderBy: { updatedAt: 'desc' },
-    select: {
-      id: true,
-      title: true,
-      updatedAt: true,
-    },
-  });
+  try {
+    const conversations = await prisma.conversation.findMany({
+      where: { projectId: PROJECT_ID },
+      orderBy: { updatedAt: 'desc' },
+      select: {
+        id: true,
+        title: true,
+        updatedAt: true,
+      },
+    });
 
-  return NextResponse.json(conversations);
+    return NextResponse.json(conversations);
+  } catch (err) {
+    console.error('[api/conversations] GET', err);
+    return NextResponse.json({ error: 'Fehler beim Laden der Unterhaltungen' }, { status: 500 });
+  }
 }
 
 // Create a new conversation
 export async function POST(req: Request) {
-  const { title } = await req.json();
+  try {
+    const { title } = await req.json();
 
-  const conversation = await prisma.conversation.create({
-    data: {
-      projectId: PROJECT_ID,
-      title: title || 'Neue Unterhaltung',
-    },
-    select: { id: true, title: true, updatedAt: true },
-  });
+    const conversation = await prisma.conversation.create({
+      data: {
+        projectId: PROJECT_ID,
+        title: title || 'Neue Unterhaltung',
+      },
+      select: { id: true, title: true, updatedAt: true },
+    });
 
-  return NextResponse.json(conversation);
+    return NextResponse.json(conversation);
+  } catch (err) {
+    console.error('[api/conversations] POST', err);
+    return NextResponse.json({ error: 'Unterhaltung konnte nicht erstellt werden' }, { status: 500 });
+  }
 }
