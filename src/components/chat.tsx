@@ -67,7 +67,7 @@ export function Chat() {
 
   conversationIdRef.current = conversationId;
 
-  const { messages, sendMessage, regenerate, status, error, setMessages } = useChat({
+  const { messages, sendMessage, status, error, setMessages } = useChat({
     id: conversationId ?? 'new',
   });
 
@@ -264,10 +264,10 @@ export function Chat() {
                     {fullText && (
                       <CopyButton text={fullText} light={message.role === 'user'} />
                     )}
-                    {message.role === 'user' && !isStreaming && (
+                    {message.role === 'user' && !isStreaming && fullText && (
                       <button
                         type="button"
-                        onClick={() => regenerate({ body: { conversationId: conversationIdRef.current } })}
+                        onClick={() => handleSend(fullText)}
                         aria-label="Erneut senden"
                         className="opacity-0 group-hover:opacity-100 transition-opacity p-0.5 rounded text-white/50 hover:text-white/80"
                       >
