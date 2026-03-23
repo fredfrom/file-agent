@@ -30,7 +30,7 @@ export function DocumentViewer({ path, passage }: DocumentViewerProps) {
       if (!res.ok) {
         throw new Error(
           res.status === 404
-            ? 'Dokument nicht gefunden. Der Pfad ist moeglicherweise nicht mehr gueltig.'
+            ? 'Dokument nicht gefunden. Der Pfad ist möglicherweise nicht mehr gültig.'
             : 'Fehler beim Laden des Dokuments. Bitte versuchen Sie es erneut.',
         );
       }

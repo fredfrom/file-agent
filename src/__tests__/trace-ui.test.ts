@@ -107,16 +107,16 @@ describe('UI-06: example questions', () => {
     expect(exampleQuestionsSource).toContain('Beispielfragen');
   });
 
-  it('contains German question about Nachtraege', () => {
-    expect(exampleQuestionsSource).toContain('Nachtraege');
+  it('contains German question about Nachträge', () => {
+    expect(exampleQuestionsSource).toContain('Nachträge');
   });
 
   it('contains German question about Baubesprechung', () => {
     expect(exampleQuestionsSource).toContain('Baubesprechung');
   });
 
-  it('contains German question about Maengel', () => {
-    expect(exampleQuestionsSource).toContain('Maengel');
+  it('contains German question about Mängel', () => {
+    expect(exampleQuestionsSource).toContain('Mängel');
   });
 
   it('has onSelect click handler prop', () => {

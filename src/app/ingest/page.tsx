@@ -15,7 +15,7 @@ export default function IngestPage() {
           className="inline-flex items-center gap-1.5 text-sm text-[var(--muted)] hover:text-[var(--foreground)] transition-colors"
         >
           <ArrowLeft size={16} />
-          Zurueck zum Chat
+          Zurück zum Chat
         </Link>
       </div>
 

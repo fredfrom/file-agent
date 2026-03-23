@@ -3,11 +3,11 @@
 import { MessageSquare } from 'lucide-react';
 
 const EXAMPLE_QUESTIONS = [
-  'Welche Nachtraege gibt es und was ist deren aktueller Status?',
+  'Welche Nachträge gibt es und was ist deren aktueller Status?',
   'Was wurde in der letzten Baubesprechung besprochen?',
-  'Welche Maengel sind noch nicht behoben?',
+  'Welche Mängel sind noch nicht behoben?',
   'Wie hoch ist der aktuelle Rechnungsstand?',
-  'Wer sind die beteiligten Nachunternehmer und welche Gewerke fuehren sie aus?',
+  'Wer sind die beteiligten Nachunternehmer und welche Gewerke führen sie aus?',
 ];
 
 interface ExampleQuestionsProps {

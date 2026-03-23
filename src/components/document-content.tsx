@@ -30,7 +30,7 @@ function TextRenderer({ content, passage }: { content: string; passage?: string 
       return (
         <pre className="whitespace-pre-wrap break-words font-mono text-xs leading-relaxed p-6 text-[var(--foreground)]">
           {before}
-          <mark ref={highlightRef} className="bg-[var(--accent-glow)] border-l-2 border-[var(--accent)] px-2 py-1 rounded">
+          <mark ref={highlightRef} className="bg-yellow-500/20 border-l-2 border-yellow-400 px-1.5 py-0.5 rounded-sm text-[var(--foreground)]">
             {highlighted}
           </mark>
           {after}
@@ -125,7 +125,7 @@ export function DocumentContent({ content, extension, passage }: DocumentContent
     return (
       <div className="flex flex-col items-center justify-center py-16 gap-3">
         <FileText size={32} className="text-[var(--muted)]" />
-        <p className="text-sm text-[var(--muted)]">Dieses Dokument hat keinen Inhalt.</p>
+        <p className="text-sm text-[var(--muted)]">Dieses Dokument hat keinen Inhalt</p>
       </div>
     );
   }

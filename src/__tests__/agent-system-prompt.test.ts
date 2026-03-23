@@ -83,7 +83,7 @@ describe('buildSystemPrompt', () => {
   });
 
   it('contains synthesis strategy section', () => {
-    expect(result).toContain('uebergreifende Fragen');
+    expect(result).toContain('übergreifende Fragen');
   });
 
   it('synthesis strategy mentions grep -rl', () => {

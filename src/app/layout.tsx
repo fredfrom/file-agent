@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Bauakte Agent",
-  description: "KI-gestuetzte Dokumentennavigation fuer Bauprojekte",
+  description: "KI-gestützte Dokumentennavigation für Bauprojekte",
 };
 
 export default function RootLayout({

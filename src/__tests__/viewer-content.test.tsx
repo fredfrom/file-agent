@@ -71,7 +71,7 @@ describe('DocumentContent', () => {
     render(
       <DocumentContent content="" extension=".pdf" />,
     );
-    expect(screen.getByText('Dieses Dokument hat keinen Inhalt.')).toBeDefined();
+    expect(screen.getByText('Dieses Dokument hat keinen Inhalt')).toBeDefined();
   });
 
   it('highlights passage when found in content', () => {
