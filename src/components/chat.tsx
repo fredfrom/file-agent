@@ -59,16 +59,19 @@ function normalizePartsForUI(role: string, parts: unknown[]): unknown[] {
   });
 }
 
+let chatKeyCounter = 0;
+
 export function Chat() {
   const [input, setInput] = useState('');
   const [conversationId, setConversationId] = useState<string | null>(null);
   const conversationIdRef = useRef<string | null>(null);
+  const [chatKey, setChatKey] = useState(() => `chat-${++chatKeyCounter}`);
   const queryClient = useQueryClient();
 
   conversationIdRef.current = conversationId;
 
   const { messages, sendMessage, status, error, setMessages } = useChat({
-    id: conversationId ?? 'new',
+    id: chatKey,
   });
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -95,27 +98,29 @@ export function Chat() {
   const handleNewConversation = useCallback(() => {
     conversationIdRef.current = null;
     setConversationId(null);
-    setMessages([]);
+    setChatKey(`chat-${++chatKeyCounter}`);
     setViewer(null);
-  }, [setMessages]);
+  }, []);
 
   const handleSelectConversation = useCallback(async (id: string) => {
     conversationIdRef.current = id;
     setConversationId(id);
+    // New chatKey so useChat creates a fresh instance for this conversation
+    setChatKey(`chat-${++chatKeyCounter}`);
     setViewer(null);
-    // Load messages from DB
-    const res = await fetch(`/api/conversations/${id}`);
-    if (res.ok) {
-      const data = await res.json();
-      // DB stores assistant content as AI SDK internal format (content array),
-      // but user messages are stored as UIMessage parts. Normalize both.
-      const loaded: UIMessage[] = data.messages.map((m: { id: string; role: string; parts: unknown[] }) => ({
-        id: m.id,
-        role: m.role as 'user' | 'assistant',
-        parts: normalizePartsForUI(m.role, m.parts),
-      }));
-      setMessages(loaded);
-    }
+    // Load messages from DB after a tick (need the new useChat instance)
+    setTimeout(async () => {
+      const res = await fetch(`/api/conversations/${id}`);
+      if (res.ok) {
+        const data = await res.json();
+        const loaded: UIMessage[] = data.messages.map((m: { id: string; role: string; parts: unknown[] }) => ({
+          id: m.id,
+          role: m.role as 'user' | 'assistant',
+          parts: normalizePartsForUI(m.role, m.parts),
+        }));
+        setMessages(loaded);
+      }
+    }, 0);
   }, [setMessages]);
 
   const handleSend = useCallback(async (text: string) => {
