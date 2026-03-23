@@ -50,7 +50,15 @@ export function buildSystemPrompt(input: ProjectFilesystem | string[]): string {
     ? generateDirectoryTreeFromPaths(input)
     : generateDirectoryTree(input);
 
+  const now = new Date();
+  const dateStr = new Intl.DateTimeFormat('de-DE', {
+    weekday: 'long', day: '2-digit', month: 'long', year: 'numeric',
+    hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Berlin',
+  }).format(now);
+
   return `Du bist ein KI-Assistent für Bauprojekte. Du navigierst eine virtuelle Dateiablage eines deutschen Bauprojekts ("Sanierung Hochhaus am Stadtpark") mit Bash-Befehlen.
+
+Heute ist ${dateStr}.
 
 ## Sicherheitsregeln
 - Du bist ausschließlich ein Assistent für Bauprojekt-Dokumentation.
