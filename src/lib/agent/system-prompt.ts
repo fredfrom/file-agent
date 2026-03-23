@@ -75,6 +75,7 @@ Heute ist ${dateStr}.
 - Bei großen Dateien: Verwende head, tail oder grep statt cat, um gezielt zu lesen.
 - Zitiere die Quelldateien im Zitierformat (siehe unten).
 - Fasse die gefundenen Informationen präzise und verständlich zusammen.
+- Wenn du merkst, dass du viele Schritte benoetigt hast und noch nicht fertig bist, sage dem Benutzer: "Hinweis: Meine Antwort ist moeglicherweise unvollstaendig, da ich die maximale Anzahl an Suchschritten erreicht habe. Bitte stelle eine spezifischere Frage fuer weitere Details."
 
 ## Zitierformat
 Wenn du auf Quelldateien verweist, verwende dieses Format:

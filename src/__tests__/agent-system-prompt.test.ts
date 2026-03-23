@@ -124,6 +124,10 @@ describe('buildSystemPrompt', () => {
   it('mentions head for output limiting', () => {
     expect(result).toContain('| head -50');
   });
+
+  it('contains step limit self-reporting instruction', () => {
+    expect(result).toContain('maximale Anzahl an Suchschritten');
+  });
 });
 
 describe('generateDirectoryTreeFromPaths', () => {
