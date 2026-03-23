@@ -2,42 +2,27 @@
 
 import { useChat, type UIMessage } from '@ai-sdk/react';
 import { useState, useRef, useEffect, useCallback } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 import Link from 'next/link';
-import { Send, Loader2, Upload, X, BarChart3, Building2, Trash2 } from 'lucide-react';
+import { Send, Loader2, Upload, X, BarChart3, Building2 } from 'lucide-react';
 import { ToolTrace } from './tool-trace';
 import { CitationText } from './citation-text';
 import { ExampleQuestions } from './example-questions';
 import { DocumentViewer } from './document-viewer';
 import { ThemeToggle } from './theme-toggle';
+import { ConversationSidebar } from './conversation-sidebar';
 import type { CitationInfo } from '@/lib/viewer/types';
-
-const STORAGE_KEY = 'bauakte-chat-history';
-
-function loadHistory(): UIMessage[] {
-  if (typeof window === 'undefined') return [];
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? JSON.parse(raw) : [];
-  } catch {
-    return [];
-  }
-}
-
-function saveHistory(messages: UIMessage[]) {
-  try {
-    // Only persist text + tool-result parts, skip streaming state
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
-  } catch {
-    // Storage full or unavailable — silently ignore
-  }
-}
 
 export function Chat() {
   const [input, setInput] = useState('');
+  const [conversationId, setConversationId] = useState<string | null>(null);
+  const queryClient = useQueryClient();
+
   const { messages, sendMessage, status, error, setMessages } = useChat({
-    id: 'bauakte',
-    initialMessages: loadHistory(),
+    id: conversationId ?? 'new',
+    body: { conversationId },
   });
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [viewer, setViewer] = useState<CitationInfo | null>(null);
 
@@ -48,21 +33,67 @@ export function Chat() {
   const isDisabled = status !== 'ready';
   const isStreaming = status === 'streaming' || status === 'submitted';
 
-  // Persist messages to localStorage when not streaming
+  // Refresh sidebar after streaming completes (new title might have been set)
   useEffect(() => {
     if (status === 'ready' && messages.length > 0) {
-      saveHistory(messages);
+      queryClient.invalidateQueries({ queryKey: ['conversations'] });
     }
-  }, [messages, status]);
+  }, [status, messages.length, queryClient]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
+  const handleNewConversation = useCallback(() => {
+    setConversationId(null);
+    setMessages([]);
+    setViewer(null);
+  }, [setMessages]);
+
+  const handleSelectConversation = useCallback(async (id: string) => {
+    setConversationId(id);
+    setViewer(null);
+    // Load messages from DB
+    const res = await fetch(`/api/conversations/${id}`);
+    if (res.ok) {
+      const data = await res.json();
+      const loaded: UIMessage[] = data.messages.map((m: { id: string; role: string; parts: unknown[] }) => ({
+        id: m.id,
+        role: m.role,
+        parts: m.parts,
+      }));
+      setMessages(loaded);
+    }
+  }, [setMessages]);
+
+  const handleSend = useCallback(async (text: string) => {
+    // If no active conversation, create one first
+    let activeId = conversationId;
+    if (!activeId) {
+      const res = await fetch('/api/conversations', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title: text.slice(0, 100) }),
+      });
+      const conv = await res.json();
+      activeId = conv.id;
+      setConversationId(activeId);
+      queryClient.invalidateQueries({ queryKey: ['conversations'] });
+    }
+    sendMessage({ text });
+  }, [conversationId, sendMessage, queryClient]);
+
   return (
     <div className="flex h-screen w-full">
+      {/* Conversation sidebar */}
+      <ConversationSidebar
+        activeId={conversationId}
+        onSelect={handleSelectConversation}
+        onNew={handleNewConversation}
+      />
+
       {/* Chat panel — shrinks when viewer is open */}
-      <div className={`flex flex-col h-full transition-all duration-300 ease-in-out ${viewer ? 'w-[40%] min-w-[360px]' : 'w-full max-w-4xl mx-auto'}`}>
+      <div className={`flex flex-col h-full transition-all duration-300 ease-in-out ${viewer ? 'w-[40%] min-w-[360px]' : 'flex-1'}`}>
         {/* Header */}
         <header className="px-6 py-4 border-b border-[var(--border)] flex items-center gap-3">
           <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-[var(--accent-glow)] border border-[var(--accent)]/20">
@@ -95,16 +126,6 @@ export function Chat() {
                 {isStreaming ? 'Verarbeite…' : 'Bereit'}
               </span>
             </div>
-            {messages.length > 0 && (
-              <button
-                type="button"
-                onClick={() => { setMessages([]); localStorage.removeItem(STORAGE_KEY); }}
-                aria-label="Chat leeren"
-                className="flex items-center justify-center w-8 h-8 rounded-lg text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--surface-2)] transition-colors"
-              >
-                <Trash2 size={15} />
-              </button>
-            )}
             <ThemeToggle />
           </div>
         </header>
@@ -123,7 +144,7 @@ export function Chat() {
                   durchsucht alle Projektdokumente und liefert Ihnen die Antwort.
                 </p>
               </div>
-              <ExampleQuestions onSelect={(q) => sendMessage({ text: q })} />
+              <ExampleQuestions onSelect={(q) => handleSend(q)} />
             </div>
           )}
 
@@ -201,7 +222,7 @@ export function Chat() {
             onSubmit={(e) => {
               e.preventDefault();
               if (input.trim()) {
-                sendMessage({ text: input });
+                handleSend(input);
                 setInput('');
               }
             }}
