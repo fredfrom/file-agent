@@ -40,24 +40,26 @@ describe('DocumentContent', () => {
     expect(tds[0].className).toContain('px-4 py-2.5');
   });
 
-  it('renders using dangerouslySetInnerHTML for .svg extension', () => {
+  it('renders SVG as sandboxed img element', () => {
     const svgContent = '<svg xmlns="http://www.w3.org/2000/svg"><circle r="10"/></svg>';
     const { container } = render(
       <DocumentContent content={svgContent} extension=".svg" />,
     );
-    const svg = container.querySelector('svg');
-    expect(svg).not.toBeNull();
+    const img = container.querySelector('img');
+    expect(img).not.toBeNull();
+    expect(img?.getAttribute('src')).toContain('data:image/svg+xml;base64,');
   });
 
-  it('strips <script> tags from SVG content', () => {
+  it('SVG sandbox prevents script execution (no dangerouslySetInnerHTML)', () => {
     const svgContent = '<svg><script>alert("xss")</script><circle r="10"/></svg>';
     const { container } = render(
       <DocumentContent content={svgContent} extension=".svg" />,
     );
+    // Rendered as <img>, no script can execute
     const script = container.querySelector('script');
     expect(script).toBeNull();
-    const circle = container.querySelector('circle');
-    expect(circle).not.toBeNull();
+    const img = container.querySelector('img');
+    expect(img).not.toBeNull();
   });
 
   it('shows "Vorschau als Text" notice for unknown extension', () => {

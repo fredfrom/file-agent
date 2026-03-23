@@ -52,8 +52,8 @@ function normalizePartsForUI(role: string, parts: unknown[]): unknown[] {
         type: `tool-${part.toolName as string}`,
         toolInvocationId: part.toolCallId,
         toolName: part.toolName,
-        state: 'partial-call',
-        args: part.args,
+        state: 'output-available',
+        input: part.args,
       };
     }
     if (part.type === 'tool-result') {
@@ -61,9 +61,9 @@ function normalizePartsForUI(role: string, parts: unknown[]): unknown[] {
         type: `tool-${part.toolName as string}`,
         toolInvocationId: part.toolCallId,
         toolName: part.toolName,
-        state: 'result',
-        args: {},
-        result: part.result ?? null,
+        state: 'output-available',
+        input: {},
+        output: part.result ?? null,
       };
     }
     return part;

@@ -107,16 +107,16 @@ function TableRenderer({ content }: { content: string }) {
 }
 
 function SvgRenderer({ content }: { content: string }) {
-  const sanitized = content
-    .replace(/<script[\s\S]*?<\/script>/gi, '')
-    .replace(/\bon\w+\s*=\s*"[^"]*"/gi, '');
+  // Render SVG as a sandboxed image to prevent XSS — no script execution possible
+  const dataUrl = `data:image/svg+xml;base64,${btoa(unescape(encodeURIComponent(content)))}`;
 
   return (
     <div
-      className="bg-white rounded-lg p-4 overflow-auto [&_svg]:w-full [&_svg]:h-auto"
+      className="bg-white rounded-lg p-4 overflow-auto"
       style={{ maxHeight: 'calc(100vh - 160px)' }}
-      dangerouslySetInnerHTML={{ __html: sanitized }}
-    />
+    >
+      <img src={dataUrl} alt="SVG Dokument" className="w-full h-auto" />
+    </div>
   );
 }
 

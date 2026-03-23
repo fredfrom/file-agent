@@ -17,7 +17,7 @@
 
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
-import ExcelJS from 'exceljs';
+import { parseExcel } from '@/lib/ingest/parse';
 import type { ProjectFilesystem } from './types';
 import { files as textFiles } from './filesystem';
 
@@ -57,31 +57,6 @@ const SVG_FILES: Record<string, string> = {
   '/05_plaene/schnitte/laengsschnitt_a_a.svg':
     '05_plaene/schnitte/laengsschnitt_a_a.svg',
 };
-
-/**
- * Convert an Excel buffer to tab-separated text.
- * Each sheet is prefixed with "=== SheetName ===" header.
- * Row values are joined with tabs, rows with newlines.
- */
-async function parseExcel(buffer: Buffer): Promise<string> {
-  const workbook = new ExcelJS.Workbook();
-  await workbook.xlsx.load(buffer as unknown as ExcelJS.Buffer);
-  const lines: string[] = [];
-
-  workbook.eachSheet((sheet) => {
-    lines.push(`=== ${sheet.name} ===`);
-    sheet.eachRow((row) => {
-      const cells = (row.values as (string | number | undefined)[]).slice(1);
-      lines.push(
-        cells
-          .map((c) => (c === undefined || c === null ? '' : String(c)))
-          .join('\t')
-      );
-    });
-  });
-
-  return lines.join('\n');
-}
 
 /**
  * Load the complete project corpus, merging inline text documents with

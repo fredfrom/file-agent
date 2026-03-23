@@ -31,7 +31,7 @@ export async function POST(req: Request) {
     }
 
     // DB-backed lazy filesystem (replaces loadCorpus -- D-07 hard cutover)
-    const { bash, paths } = await createDbFilesystem(PROJECT_ID);
+    const { bash, paths, accessLogger } = await createDbFilesystem(PROJECT_ID);
     const { tools } = await createBashTool({
       sandbox: bash,
       destination: '/',
@@ -69,19 +69,25 @@ export async function POST(req: Request) {
       tools: { bash: tools.bash },
       stopWhen: stepCountIs(15),
       async onFinish({ response }) {
-        // Save all response messages (assistant + tool) to DB
-        if (conversationId) {
-          for (const msg of response.messages) {
-            if (msg.role === 'assistant' || msg.role === 'tool') {
-              await prisma.message.create({
-                data: {
-                  conversationId,
-                  role: msg.role,
-                  parts: JSON.parse(JSON.stringify(msg.content)),
-                },
-              });
+        try {
+          // Save all response messages (assistant + tool) to DB
+          if (conversationId) {
+            for (const msg of response.messages) {
+              if (msg.role === 'assistant' || msg.role === 'tool') {
+                await prisma.message.create({
+                  data: {
+                    conversationId,
+                    role: msg.role,
+                    parts: JSON.parse(JSON.stringify(msg.content)),
+                  },
+                });
+              }
             }
           }
+          // Flush access logs to DB
+          await accessLogger.flush();
+        } catch (err) {
+          console.error('[api/chat] onFinish save failed', err);
         }
       },
     });

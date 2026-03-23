@@ -18,7 +18,7 @@ function describeCommand(command: string): { icon: typeof Search; label: string 
   }
   if (cmd.startsWith('ls ')) {
     const folder = cmd.replace('ls ', '').replace(/\//g, ' / ').trim();
-    return { icon: FolderOpen, label: `Durchsuche Ordner` };
+    return { icon: FolderOpen, label: `Durchsuche ${folder || 'Ordner'}` };
   }
   if (cmd.startsWith('find ')) {
     return { icon: Search, label: 'Suche Dateien...' };
