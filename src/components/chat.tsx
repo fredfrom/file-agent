@@ -36,6 +36,7 @@ function CopyButton({ text, light }: { text: string; light?: boolean }) {
 // User messages are stored as UIMessage parts directly.
 // Assistant messages are stored as AI SDK internal content format from onFinish.
 function normalizePartsForUI(role: string, parts: unknown[]): unknown[] {
+  if (!Array.isArray(parts)) return [{ type: 'text', text: '' }];
   if (role === 'user') return parts;
 
   // Assistant content from onFinish is an array of { type: 'text', text } | { type: 'tool-call', ... }
@@ -127,7 +128,8 @@ export function Chat() {
         const res = await fetch(`/api/conversations/${id}`);
         if (res.ok) {
           const data = await res.json();
-          const loaded: UIMessage[] = data.messages.map((m: { id: string; role: string; parts: unknown[] }) => ({
+          const msgs = Array.isArray(data?.messages) ? data.messages : [];
+          const loaded: UIMessage[] = msgs.map((m: { id: string; role: string; parts: unknown[] }) => ({
             id: m.id,
             role: m.role as 'user' | 'assistant',
             parts: normalizePartsForUI(m.role, m.parts),
